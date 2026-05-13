@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ritin Wadekar — AI Engineer building production AI systems. Currently the sole AI Engineer at Onpoint Insights, shipping a medical coding pipeline grounded in CMS authoritative data." />
+  <meta name="theme-color" content="#08090B" />
+  <title>Ritin Wadekar — AI Engineer</title>
+
+  <!-- Set theme before paint to prevent flash -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        var theme = stored || (prefersLight ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* =========================================================
+       === TOKENS =============================================
+       ========================================================= */
+    :root,
+    [data-theme="dark"] {
+      --bg: #08090B;
+      --fg: #FAFAF7;
+      --fg-dim: rgba(250, 250, 247, 0.62);
+      --fg-dimmer: rgba(250, 250, 247, 0.38);
+      --hairline: rgba(255, 255, 255, 0.08);
+      --hairline-strong: rgba(255, 255, 255, 0.16);
+      --accent: #E8B04B;
+      --accent-soft: rgba(232, 176, 75, 0.14);
+      --nav-bg: rgba(8, 9, 11, 0.62);
+      --glow: rgba(232, 176, 75, 0.07);
+    }
+    [data-theme="light"] {
+      --bg: #FAFAF7;
+      --fg: #121212;
+      --fg-dim: rgba(18, 18, 18, 0.62);
+      --fg-dimmer: rgba(18, 18, 18, 0.38);
+      --hairline: rgba(0, 0, 0, 0.08);
+      --hairline-strong: rgba(0, 0, 0, 0.16);
+      --accent: #B8841F;
+      --accent-soft: rgba(184, 132, 31, 0.14);
+      --nav-bg: rgba(250, 250, 247, 0.7);
+      --glow: rgba(184, 132, 31, 0.06);
+    }
+
+    :root {
+      --ease: cubic-bezier(0.65, 0, 0.35, 1);
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+      --pad-x: clamp(24px, 6vw, 96px);
+      --section-y: clamp(96px, 14vw, 200px);
+      --content-max: 1280px;
+      --text-max: 720px;
+    }
+
+    /* =========================================================
+       === RESET ==============================================
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      transition: background-color 300ms var(--ease), color 300ms var(--ease);
+    }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* Accessible focus */
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 1.5px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      padding: 8px 14px;
+      background: var(--fg);
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      z-index: 1000;
+    }
+    .skip-link:focus { left: 16px; top: 16px; }
+
+    /* =========================================================
+       === TYPOGRAPHY =========================================
+       ========================================================= */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--fg-dim);
+    }
+    .mono { font-family: var(--font-mono); }
+    .serif { font-family: var(--font-serif); }
+
+    h1, h2, h3 { margin: 0; font-weight: 400; }
+
+    /* =========================================================
+       === LAYOUT =============================================
+       ========================================================= */
+    .container {
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding-inline: var(--pad-x);
+    }
+    main > section { padding-block: var(--section-y); position: relative; }
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      margin-bottom: clamp(48px, 8vw, 96px);
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+    }
+    .section-title em { font-style: italic; }
+    .hairline { border: 0; height: 1px; background: var(--hairline); margin: 0; }
+
+    /* =========================================================
+       === NAV ================================================
+       ========================================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+      transition: transform 320ms var(--ease);
+    }
+    .nav.is-hidden { transform: translateY(-110%); }
+
+    .nav-inner {
+      pointer-events: auto;
+      width: 100%;
+      max-width: var(--content-max);
+      margin-inline: var(--pad-x);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      transition:
+        max-width 380ms var(--ease),
+        margin 380ms var(--ease),
+        padding 380ms var(--ease),
+        background-color 320ms var(--ease),
+        border-color 320ms var(--ease),
+        backdrop-filter 320ms var(--ease);
+      border: 1px solid transparent;
+      border-radius: 100px;
+    }
+    .nav.is-scrolled .nav-inner {
+      max-width: 720px;
+      margin-top: 12px;
+      padding: 10px 22px;
+      background: var(--nav-bg);
+      border-color: var(--hairline);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+    }
+    .wordmark {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+    }
+    .wordmark .dot { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--fg-dim);
+      text-transform: uppercase;
+      position: relative;
+      padding: 4px 0;
+      transition: color 200ms var(--ease);
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 350ms var(--ease);
+    }
+    .nav-link:hover { color: var(--fg); }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    .theme-toggle {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--fg);
+      transition: background-color 200ms var(--ease);
+    }
+    .theme-toggle:hover { background: var(--accent-soft); }
+    .theme-toggle svg { width: 16px; height: 16px; }
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+    .menu-toggle {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg);
+      padding: 4px 0;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms var(--ease);
+    }
+    .mobile-menu.is-open { opacity: 1; pointer-events: auto; }
+    .mobile-menu .nav-link {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: var(--fg);
+    }
+    .mobile-menu .nav-link::after { bottom: 6px; }
+
+    /* =========================================================
+       === HERO ===============================================
+       ========================================================= */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 140px;
+      padding-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 110vw;
+      height: 90vh;
+      max-width: 1600px;
+      background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > .container { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      margin-bottom: clamp(32px, 6vw, 56px);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+    }
+    .hero.is-loaded .hero-eyebrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(56px, 11vw, 140px);
+      line-height: 0.96;
+      letter-spacing: -0.025em;
+      max-width: 1200px;
+      margin: 0;
+    }
+    .hero-line { display: block; }
+    .hero-headline .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(0.4em);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+      transition-delay: calc(var(--i, 0) * 70ms + 200ms);
+      margin-right: 0.18em;
+    }
+    .hero-headline .word-last { margin-right: 0; }
+    .hero.is-loaded .hero-headline .word {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .emphasis {
+      font-style: italic;
+      position: relative;
+      display: inline-block;
+    }
+    .emphasis::after {
+      content: "";
+      position: absolute;
+      left: 0.04em;
+      right: 0.16em;
+      bottom: 0.13em;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 700ms var(--ease) 1100ms;
+    }
+    .hero.is-loaded .emphasis::after { transform: scaleX(1); }
+
+    .hero-supporting {
+      margin-top: clamp(40px, 6vw, 64px);
+      max-width: 620px;
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.55;
+      color: var(--fg-dim);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms var(--ease) 1000ms, transform 600ms var(--ease) 1000ms;
+    }
+    .hero.is-loaded .hero-supporting {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      left: var(--pad-x);
+      bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fg-dimmer);
+      opacity: 0;
+      transition: opacity 600ms var(--ease) 1300ms;
+    }
+    .hero.is-loaded .scroll-cue { opacity: 1; }
+    .scroll-cue-line {
+      width: 1px;
+      height: 36px;
+      background: var(--fg-dimmer);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-cue-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      animation: scroll-pulse 2.4s var(--ease-out) infinite;
+    }
+    @keyframes scroll-pulse {
+      0%   { transform: translateY(-100%); }
+      50%  { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* =========================================================
+       === WORK ===============================================
+       ========================================================= */
+    .work-section .section-header { margin-bottom: clamp(64px, 9vw, 120px); }
+
+    .role {
+      display: grid;
+      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+      gap: clamp(40px, 6vw, 96px);
+      padding-block: clamp(64px, 8vw, 112px);
+      border-top: 1px solid var(--hairline);
+      position: relative;
+    }
+    .role:last-of-type { border-bottom: 1px solid var(--hairline); }
+
+    .role-left { position: relative; }
+    .role-number {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .role-title {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .role-company {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      margin-bottom: 12px;
+    }
+    .role-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      line-height: 1.6;
+    }
+
+    .role-right { max-width: var(--text-max); }
+    .role-narrative {
+      font-size: clamp(17px, 1.4vw, 19px);
+      line-height: 1.65;
+      color: var(--fg);
+      margin: 0 0 clamp(48px, 6vw, 72px) 0;
+    }
+    .role-narrative .accent { color: var(--accent); }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(20px, 3vw, 40px);
+      margin-bottom: clamp(40px, 5vw, 56px);
+    }
+    .metric {
+      border-top: 1px solid var(--hairline-strong);
+      padding-top: 18px;
+    }
+    .metric-value {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 5.2vw, 72px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: var(--fg);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 14px;
+    }
+    .metric-value.accent { color: var(--accent); }
+    .metric-caption {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      line-height: 1.55;
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--fg-dim);
+      padding: 6px 12px;
+      border: 1px solid var(--hairline-strong);
+      border-radius: 4px;
+      background: transparent;
+      transition: transform 180ms var(--ease), border-color 180ms var(--ease), color 180ms var(--ease);
+    }
+    .pill:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      color: var(--fg);
+    }
+
+    /* =========================================================
+       === CAPABILITIES =======================================
+       ========================================================= */
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(48px, 6vw, 88px) clamp(40px, 5vw, 80px);
+    }
+    .capability-title {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .capability-list {
+      font-size: clamp(15px, 1.2vw, 17px);
+      line-height: 1.75;
+      color: var(--fg-dim);
+      margin: 0;
+    }
+    .capability-list .dot {
+      color: var(--accent);
+      margin: 0 0.4em;
+      opacity: 0.55;
+    }
+
+    /* =========================================================
+       === ABOUT ==============================================
+       ========================================================= */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: clamp(48px, 7vw, 120px);
+      align-items: start;
+    }
+    .about-prose {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      color: var(--fg);
+      max-width: 640px;
+      margin: 0;
+    }
+    .about-prose em { font-style: italic; }
+
+    .education-list { list-style: none; padding: 0; margin: 0; }
+    .education-entry {
+      padding-block: 28px;
+      border-top: 1px solid var(--hairline);
+    }
+    .education-entry:last-child { border-bottom: 1px solid var(--hairline); }
+    .education-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 6px;
+    }
+    .education-school {
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+    }
+    .education-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      white-space: nowrap;
+    }
+    .education-degree {
+      font-size: 15px;
+      color: var(--fg-dim);
+      line-height: 1.55;
+    }
+    .education-gpa {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+
+    /* =========================================================
+       === CONTACT / FOOTER ===================================
+       ========================================================= */
+    .contact {
+      padding-block: clamp(120px, 16vw, 220px) 48px;
+      border-top: 1px solid var(--hairline);
+    }
+    .contact-headline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(48px, 9vw, 120px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      max-width: 1100px;
+      margin: 0 0 clamp(64px, 8vw, 104px) 0;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2vw, 14px);
+      margin-bottom: clamp(80px, 10vw, 140px);
+    }
+    .contact-link {
+      font-family: var(--font-serif);
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+    }
+    .contact-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0.08em;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 400ms var(--ease);
+    }
+    .contact-link:hover::after { transform: scaleX(1); }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      padding-top: 32px;
+      border-top: 1px solid var(--hairline);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+
+    /* =========================================================
+       === MOTION / REVEALS ===================================
+       ========================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal[data-delay="1"] { transition-delay: 80ms; }
+    .reveal[data-delay="2"] { transition-delay: 160ms; }
+    .reveal[data-delay="3"] { transition-delay: 240ms; }
+
+    /* =========================================================
+       === REDUCED MOTION =====================================
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 250ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-headline .word,
+      .hero-eyebrow,
+      .hero-supporting,
+      .scroll-cue,
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .emphasis::after { transform: scaleX(1) !important; }
+      .scroll-cue-line::after { animation: none !important; }
+    }
+
+    /* =========================================================
+       === RESPONSIVE =========================================
+       ========================================================= */
+    @media (max-width: 1024px) {
+      .role {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+      }
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .capabilities-grid {
+        gap: 56px 48px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; gap: 8px; }
+      .nav.is-scrolled .nav-inner { max-width: none; margin-inline: 16px; }
+
+      .hero { padding-top: 120px; }
+      .hero-headline .word { margin-right: 0.15em; }
+      .scroll-cue { left: 24px; bottom: 24px; }
+
+      .metrics {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+      }
+      .capabilities-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px;
+      }
+      .footer-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .education-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- =================== NAV =================== -->
+  <header class="nav" id="nav" aria-label="Primary">
+    <div class="nav-inner">
+      <a href="#top" class="wordmark" aria-label="Ritin Wadekar — home">
+        ritin wadekar<span class="dot">.</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" type="button">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+        </button>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" type="button">
+        menu
+      </button>
+    </div>
+  </header>
+
+  <!-- mobile overlay menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="#work" class="nav-link" data-close-menu>Work</a>
+    <a href="#skills" class="nav-link" data-close-menu>Skills</a>
+    <a href="#about" class="nav-link" data-close-menu>About</a>
+    <a href="#contact" class="nav-link" data-close-menu>Contact</a>
+    <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle color theme" type="button" style="margin-top: 16px;">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      </svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+    </button>
+  </div>
+
+  <main id="main">
+    <span id="top" aria-hidden="true"></span>
+
+    <!-- =================== HERO =================== -->
+    <section class="hero" id="hero" aria-label="Introduction">
+      <div class="container">
+        <p class="eyebrow hero-eyebrow">AI Engineer · San Francisco · Available for Work</p>
+
+        <h1 class="hero-headline">
+          <span class="hero-line">
+            <span class="word" style="--i:0">Building</span><span class="word" style="--i:1">AI</span><span class="word" style="--i:2">systems</span><span class="word" style="--i:3">that</span><span class="word" style="--i:4">ship</span><span class="word" style="--i:5">to</span><span class="word" style="--i:6">production —</span>
+          </span>
+          <span class="hero-line">
+            <em class="emphasis"><span class="word" style="--i:7">not</span><span class="word word-last" style="--i:8">demos.</span></em>
+          </span>
+        </h1>
+
+        <p class="hero-supporting">
+          I'm the sole AI Engineer at Onpoint Insights, building a production medical coding pipeline grounded in CMS authoritative sources for a market projected to reach $8.4B by 2033. Before this I shipped multi-agent LLM systems, RAG assistants, and causal models on Azure Databricks and Snowflake.
+        </p>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">
+        <span>scroll</span>
+        <span class="scroll-cue-line"></span>
+      </div>
+    </section>
+
+    <!-- =================== WORK =================== -->
+    <section class="work-section" id="work" aria-labelledby="work-heading">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow reveal">01 — Selected Work</p>
+          <h2 class="section-title reveal" data-delay="1" id="work-heading">
+            Four roles. One thread: <em>shipping AI that holds up under real load.</em>
+          </h2>
+        </header>
+
+        <!-- Role 01 -->
+        <article class="role">
+          <div class="role-left">
+            <p class="role-number reveal">01</p>
+            <h3 class="role-title reveal" data-delay="1">AI Engineer</h3>
+            <p class="role-company reveal" data-delay="2">Onpoint Insights</p>
+            <p class="role-meta reveal" data-delay="3">
+              San Francisco, CA<br />Jan 2026 — Present
+            </p>
+          </div>
+          <div class="role-right">
+            <p class="role-narrative reveal">
+              As the sole AI Engineer on this project, I own end-to-end R&amp;D for a production medical coding pipeline targeting a market projected to reach $8.4B by 2033. I avoided a flawed vanilla-LLM baseline — sub-70% coding accuracy — and instead designed a two-stage retrieve-then-rank architecture grounded in three authoritative CMS sources, with Medicaid and Medicare compliance rules baked in. The result is a <span class="accent">7.66% error rate</span> against a 10–20% manual-coding industry baseline, in a sector where coding errors cost the healthcare industry over $1B annually.
+            </p>
+
+            <div class="metrics">
+              <div class="metric reveal">
+                <div class="metric-value accent" data-value="7.66%">0%</div>
+                <div class="metric-caption">Error rate vs.<br />10–20% industry baseline</div>
+              </div>
+              <div class="metric reveal" data-delay="1">
+                <div class="metric-value" data-value="3×">0×</div>
+                <div class="metric-caption">Accuracy over<br />single-pass LLM baselines</div>
+              </div>
+              <div class="metric reveal" data-delay="2">
+                <div class="metric-value" data-value="$8.4B">$0B</div>
+                <div class="metric-caption">Target market<br />size by 2033</div>
+              </div>
+            </div>
+
+            <div class="tech-pills reveal">
+              <span class="pill">Python</span>
+              <span class="pill">RAG</span>
+              <span class="pill">FAISS</span>
+              <span class="pill">GPT-4</span>
+              <span class="pill">CMS Data</span>
+              <span class="pill">ICD-10 / CPT</span>
+              <span class="pill">Retrieve-then-Rank</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Role 02 -->
+        <article class="role">
+          <div class="role-left">
+            <p class="role-number reveal">02</p>
+            <h3 class="role-title reveal" data-delay="1">Data Scientist</h3>
+            <p class="role-company reveal" data-delay="2">Onpoint Insights</p>
+            <p class="role-meta reveal" data-delay="3">
+              Andover, MA<br />Jan 2025 — Dec 2025
+            </p>
+          </div>
+          <div class="role-right">
+            <p class="role-narrative reveal">
+              Shipped a multi-agent LLM pipeline on Azure Databricks for natural-language-to-SQL over 20K+ product records, containerized with Docker for reproducible runs across dev and staging. Built a RAG assistant over 20+ documents using transformer embeddings, FAISS vector indexing, and GPT-4 intent routing — <span class="accent">17% better answer accuracy</span> than an embedding-only baseline. On the analytics side, A/B tests and causal regression quantified incremental campaign lift for a top-3 pharmaceutical client, enabling spend optimization that lifted ROI by 4.2%.
+            </p>
+
+            <div class="metrics">
+              <div class="metric reveal">
+                <div class="metric-value accent" data-value="40%">0%</div>
+                <div class="metric-caption">Analyst effort<br />cut by NL-to-SQL pipeline</div>
+              </div>
+              <div class="metric reveal" data-delay="1">
+                <div class="metric-value" data-value="17%">0%</div>
+                <div class="metric-caption">Accuracy lift over<br />embedding-only baseline</div>
+              </div>
+              <div class="metric reveal" data-delay="2">
+                <div class="metric-value" data-value="4.2%">0%</div>
+                <div class="metric-caption">Campaign ROI lift<br />via causal modeling</div>
+              </div>
+            </div>
+
+            <div class="tech-pills reveal">
+              <span class="pill">Azure Databricks</span>
+              <span class="pill">Docker</span>
+              <span class="pill">FAISS</span>
+              <span class="pill">GPT-4</span>
+              <span class="pill">RAG</span>
+              <span class="pill">Multi-Agent LLM</span>
+              <span class="pill">Power Automate</span>
+              <span class="pill">A/B Testing</span>
+              <span class="pill">Causal Inference</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Role 03 -->
+        <article class="role">
+          <div class="role-left">
+            <p class="role-number reveal">03</p>
+            <h3 class="role-title reveal" data-delay="1">Data Science Intern</h3>
+            <p class="role-company reveal" data-delay="2">Onpoint Insights</p>
+            <p class="role-meta reveal" data-delay="3">
+              Andover, MA<br />May 2024 — Aug 2024
+            </p>
+          </div>
+          <div class="role-right">
+            <p class="role-narrative reveal">
+              Pulled 10M+ transaction records from Snowflake to engineer a hybrid recommendation system pairing Market Basket Analysis with Word2Vec embeddings, served via vector similarity search — <span class="accent">drove a 6.7% lift in Average Order Size</span>. Built an entity-resolution layer (NER plus embedding-driven cosine similarity) to reconcile partial company names from Azure SQL into canonical entities, and trained in-warehouse additive and multiplicative time-series forecasts via Snowpark to 12% MAPE for inventory and production planning.
+            </p>
+
+            <div class="metrics">
+              <div class="metric reveal">
+                <div class="metric-value" data-value="10M+">0M+</div>
+                <div class="metric-caption">Transaction records<br />processed from Snowflake</div>
+              </div>
+              <div class="metric reveal" data-delay="1">
+                <div class="metric-value accent" data-value="6.7%">0%</div>
+                <div class="metric-caption">Average Order Size<br />lift from hybrid recsys</div>
+              </div>
+              <div class="metric reveal" data-delay="2">
+                <div class="metric-value" data-value="12%">0%</div>
+                <div class="metric-caption">MAPE on in-warehouse<br />time-series forecasting</div>
+              </div>
+            </div>
+
+            <div class="tech-pills reveal">
+              <span class="pill">Snowflake</span>
+              <span class="pill">Snowpark</span>
+              <span class="pill">Word2Vec</span>
+              <span class="pill">NER</span>
+              <span class="pill">Azure SQL</span>
+              <span class="pill">Market Basket Analysis</span>
+              <span class="pill">SQL</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Role 04 -->
+        <article class="role">
+          <div class="role-left">
+            <p class="role-number reveal">04</p>
+            <h3 class="role-title reveal" data-delay="1">Data Science Intern</h3>
+            <p class="role-company reveal" data-delay="2">Creative Galileo</p>
+            <p class="role-meta reveal" data-delay="3">
+              Pune, India<br />Apr 2023 — Jul 2023
+            </p>
+          </div>
+          <div class="role-right">
+            <p class="role-narrative reveal">
+              Built churn-prediction models on user behavioral data at a Series-A Ed-Tech with 10M+ app downloads, generating risk scores for retention initiatives via pandas, scikit-learn, and AWS SageMaker. A parallel telemetry analysis on AWS S3 surfaced latency bottlenecks in the funnel, driving targeted system optimizations that <span class="accent">cut app load times 10% and payment-page churn 12%</span>.
+            </p>
+
+            <div class="metrics">
+              <div class="metric reveal">
+                <div class="metric-value" data-value="10M+">0M+</div>
+                <div class="metric-caption">App downloads at<br />the Series-A platform</div>
+              </div>
+              <div class="metric reveal" data-delay="1">
+                <div class="metric-value accent" data-value="10%">0%</div>
+                <div class="metric-caption">App load time<br />reduction post-optimization</div>
+              </div>
+              <div class="metric reveal" data-delay="2">
+                <div class="metric-value" data-value="12%">0%</div>
+                <div class="metric-caption">Payment-page churn<br />reduction</div>
+              </div>
+            </div>
+
+            <div class="tech-pills reveal">
+              <span class="pill">Python</span>
+              <span class="pill">pandas</span>
+              <span class="pill">scikit-learn</span>
+              <span class="pill">AWS SageMaker</span>
+              <span class="pill">AWS S3</span>
+              <span class="pill">Churn Modeling</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =================== CAPABILITIES =================== -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow reveal">02 — Capabilities</p>
+          <h2 class="section-title reveal" data-delay="1" id="skills-heading">
+            A stack built for <em>production</em>, not slide decks.
+          </h2>
+        </header>
+
+        <div class="capabilities-grid">
+          <div class="reveal">
+            <h3 class="capability-title">AI &amp; ML Engineering</h3>
+            <p class="capability-list">
+              Python<span class="dot">·</span>PyTorch<span class="dot">·</span>TensorFlow<span class="dot">·</span>Keras<span class="dot">·</span>scikit-learn<span class="dot">·</span>RAG<span class="dot">·</span>FAISS<span class="dot">·</span>Transformer Embeddings<span class="dot">·</span>LoRA / QLoRA<span class="dot">·</span>Multi-Agent LLM Pipelines<span class="dot">·</span>NER<span class="dot">·</span>Word2Vec<span class="dot">·</span>GPT-4
+            </p>
+          </div>
+
+          <div class="reveal" data-delay="1">
+            <h3 class="capability-title">Data &amp; Infrastructure</h3>
+            <p class="capability-list">
+              Snowflake<span class="dot">·</span>Snowpark<span class="dot">·</span>Azure Databricks<span class="dot">·</span>PySpark<span class="dot">·</span>Apache Hadoop<span class="dot">·</span>Docker<span class="dot">·</span>Git<span class="dot">·</span>GitHub Actions<span class="dot">·</span>MongoDB<span class="dot">·</span>MySQL<span class="dot">·</span>PostgreSQL<span class="dot">·</span>MS SQL Server<span class="dot">·</span>Oracle
+            </p>
+          </div>
+
+          <div class="reveal" data-delay="2">
+            <h3 class="capability-title">Cloud Platforms</h3>
+            <p class="capability-list">
+              AWS S3<span class="dot">·</span>Redshift<span class="dot">·</span>Glue<span class="dot">·</span>Athena<span class="dot">·</span>SageMaker<span class="dot">·</span>QuickSight<span class="dot">·</span>Azure Kubernetes<span class="dot">·</span>Azure Blob Storage
+            </p>
+          </div>
+
+          <div class="reveal" data-delay="3">
+            <h3 class="capability-title">Analytics &amp; BI</h3>
+            <p class="capability-list">
+              Tableau<span class="dot">·</span>PowerBI<span class="dot">·</span>Alteryx<span class="dot">·</span>Mixpanel<span class="dot">·</span>A/B Testing<span class="dot">·</span>Causal Inference<span class="dot">·</span>Time-Series Forecasting<span class="dot">·</span>OCR<span class="dot">·</span>Power Automate
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================== ABOUT =================== -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow reveal">03 — About</p>
+          <h2 class="section-title reveal" data-delay="1" id="about-heading">
+            From electronics in Pune to AI in <em>San Francisco</em>.
+          </h2>
+        </header>
+
+        <div class="about-grid">
+          <p class="about-prose reveal">
+            I started in electronics and telecommunication at Savitribai Phule Pune University, picked up honors in AI and machine learning, then crossed the Pacific for a master's in Business Analytics and AI at UT Dallas. I'm in San Francisco now, building the kind of AI systems that hold up under real production load — <em>grounded in authoritative data, measured against honest baselines, and shipped.</em>
+          </p>
+
+          <ul class="education-list reveal" data-delay="1">
+            <li class="education-entry">
+              <div class="education-row">
+                <span class="education-school">The University of Texas at Dallas</span>
+                <span class="education-date">May 2025</span>
+              </div>
+              <div class="education-degree">M.S., Business Analytics &amp; Artificial Intelligence</div>
+              <div class="education-gpa">GPA · 3.5</div>
+            </li>
+            <li class="education-entry">
+              <div class="education-row">
+                <span class="education-school">Savitribai Phule Pune University</span>
+                <span class="education-date">May 2023</span>
+              </div>
+              <div class="education-degree">B.E., Electronics &amp; Telecommunication · Honors in AI / ML</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =================== CONTACT / FOOTER =================== -->
+  <footer class="contact" id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <p class="eyebrow reveal" style="margin-bottom: clamp(32px, 5vw, 56px);">04 — Contact</p>
+      <h2 class="contact-headline reveal" data-delay="1" id="contact-heading">
+        Let's build something that ships.
+      </h2>
+
+      <div class="contact-links">
+        <a class="contact-link reveal" href="mailto:ritinwadekar6@gmail.com">ritinwadekar6@gmail.com</a>
+        <a class="contact-link reveal" data-delay="1" href="tel:+19728225748">(972) 822-5748</a>
+        <a class="contact-link reveal" data-delay="2" href="https://linkedin.com/in/ritinwadekar" target="_blank" rel="noopener">linkedin.com/in/ritinwadekar</a>
+      </div>
+
+      <div class="footer-meta">
+        <span>San Francisco, CA</span>
+        <span>© 2026 · Crafted by Ritin</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ============ Hero load ============ */
+      requestAnimationFrame(function () {
+        document.getElementById('hero').classList.add('is-loaded');
+      });
+
+      /* ============ Theme toggle ============ */
+      const root = document.documentElement;
+      function setTheme(theme, persist) {
+        root.setAttribute('data-theme', theme);
+        if (persist) {
+          try { localStorage.setItem('theme', theme); } catch (e) {}
+        }
+      }
+      function toggleTheme() {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        setTheme(next, true);
+      }
+      document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+      /* ============ Mobile menu ============ */
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      function setMenu(open) {
+        mobileMenu.classList.toggle('is-open', open);
+        mobileMenu.setAttribute('aria-hidden', String(!open));
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.textContent = open ? 'close' : 'menu';
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      menuToggle.addEventListener('click', function () {
+        setMenu(!mobileMenu.classList.contains('is-open'));
+      });
+      mobileMenu.querySelectorAll('[data-close-menu]').forEach(function (el) {
+        el.addEventListener('click', function () { setMenu(false); });
+      });
+
+      /* ============ Nav scroll behavior ============ */
+      const nav = document.getElementById('nav');
+      let lastY = window.scrollY;
+      let ticking = false;
+      function onScroll() {
+        const y = window.scrollY;
+        if (y > 80) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
+
+        const dy = y - lastY;
+        if (y > 200 && dy > 8) nav.classList.add('is-hidden');
+        else if (dy < -4 || y < 100) nav.classList.remove('is-hidden');
+
+        lastY = y;
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      /* ============ Lenis smooth scroll ============ */
+      let lenis = null;
+      if (!prefersReduced && typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          lerp: 0.1,
+          smoothWheel: true,
+          syncTouch: false,
+        });
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+
+      // Anchor smooth scrolling that respects Lenis
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          const id = link.getAttribute('href');
+          if (id.length <= 1) return;
+          const target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          if (lenis) lenis.scrollTo(target, { offset: -20 });
+          else target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+
+      /* ============ Reveal on scroll ============ */
+      const revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !prefersReduced) {
+        const io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+
+      /* ============ Metric count-up ============ */
+      function parseMetric(str) {
+        // Match optional prefix (e.g. $), number with optional decimals, suffix (rest)
+        const m = str.match(/^([^\d.\-]*)(-?\d+(?:\.\d+)?)(.*)$/);
+        if (!m) return null;
+        const prefix = m[1];
+        const numStr = m[2];
+        const suffix = m[3];
+        const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
+        return { prefix: prefix, target: parseFloat(numStr), suffix: suffix, decimals: decimals };
+      }
+
+      function format(prefix, val, suffix, decimals) {
+        const num = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toString();
+        return prefix + num + suffix;
+      }
+
+      function animateMetric(el) {
+        const original = el.getAttribute('data-value') || el.textContent.trim();
+        const parsed = parseMetric(original);
+        if (!parsed) { el.textContent = original; return; }
+        if (prefersReduced) { el.textContent = original; return; }
+
+        const duration = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+          const val = parsed.target * eased;
+          el.textContent = format(parsed.prefix, val, parsed.suffix, parsed.decimals);
+          if (t < 1) requestAnimationFrame(tick);
+          else el.textContent = original;
+        }
+        requestAnimationFrame(tick);
+      }
+
+      const metricEls = document.querySelectorAll('.metric-value');
+      if ('IntersectionObserver' in window) {
+        const mo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateMetric(entry.target);
+              mo.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        metricEls.forEach(function (el) { mo.observe(el); });
+      } else {
+        metricEls.forEach(function (el) {
+          el.textContent = el.getAttribute('data-value') || el.textContent.trim();
+        });
+      }
+
+      /* ============ Update theme on system preference change (only if user hasn't picked) ============ */
+      try {
+        const mq = window.matchMedia('(prefers-color-scheme: light)');
+        mq.addEventListener('change', function (e) {
+          if (!localStorage.getItem('theme')) {
+            setTheme(e.matches ? 'light' : 'dark', false);
+          }
+        });
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
