@@ -937,8 +937,10 @@
       .hero-art-slot {
         position: relative;
         width: 100%;
-        height: 38vh;                  /* was 60vh — removes empty paper above + below the orb */
-        order: -1;
+        height: 28vh;                  /* shorter — subtle accent, not the focal element */
+        order: 1;                       /* place AFTER .container so text comes first */
+        opacity: 0.5;                   /* dimmed so it reads as decoration */
+        margin-top: clamp(24px, 5vw, 40px);
       }
       .hero-content { max-width: 100%; }
       .hero-headline { max-width: none; }  /* let the headline use full container width */
