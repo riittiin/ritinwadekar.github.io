@@ -1,82 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Ritin Wadekar, AI Engineer building production AI systems. Currently the sole AI Engineer at Onpoint Insights, shipping a medical coding pipeline grounded in CMS authoritative data." />
-  <meta name="theme-color" content="#08090B" />
+
+  <!-- Set js-motion class before paint, only when reduced-motion is NOT requested.
+       Every motion-gated CSS rule below keys off html.js-motion to avoid flash. -->
+  <script>
+    (function () {
+      try {
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js-motion');
+        }
+      } catch (e) { /* no matchMedia → fall through to no-motion default */ }
+    })();
+  </script>
+  <meta name="theme-color" content="#13100C" />
   <title>Ritin Wadekar | AI Engineer</title>
 
-  <!-- Fonts -->
+  <!-- Fonts: Fraunces variable (ital,opsz,wght,SOFT,WONK), Geist Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,30..100,0..1;1,9..144,300..900,30..100,0..1&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" />
 
   <style>
     /* =========================================================
-       === TOKENS =============================================
+       === TOKENS ==============================================
        ========================================================= */
-    :root,
-    [data-theme="dark"] {
-      --bg: #08090B;
-      --fg: #FAFAF7;
-      --fg-dim: rgba(250, 250, 247, 0.62);
-      --fg-dimmer: rgba(250, 250, 247, 0.38);
-      --hairline: rgba(255, 255, 255, 0.08);
-      --hairline-strong: rgba(255, 255, 255, 0.16);
-      --accent: #E8B04B;
-      --accent-soft: rgba(232, 176, 75, 0.14);
-      --nav-bg: rgba(8, 9, 11, 0.62);
-      --glow: rgba(232, 176, 75, 0.07);
-    }
     :root {
-      --ease: cubic-bezier(0.65, 0, 0.35, 1);
+      /* Dark warm-neutral. Departs from the brief's light-mode rule per user
+         override. Warm near-black keeps the archival feel; green lifted for
+         legibility on dark; terracotta in shader unchanged. */
+      --paper:    #13100C;  /* warm near-black, the base */
+      --paper-2:  #1B1611;  /* slightly lighter inset */
+      --ink:      #F0E9D8;  /* warm cream — primary text */
+      --ink-dim:  #A8A091;  /* secondary text */
+      --ink-soft: #6B6457;  /* tertiary, metadata */
+      --rule:     #3A322A;  /* warm dark hairline */
+      --accent:   #7AA08A;  /* lifted botanical green, legible on dark */
+      /* --accent-2: #C9512A — shader-only, never referenced in CSS */
+
+      --ease:     cubic-bezier(0.65, 0, 0.35, 1);
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-      --font-serif: 'Instrument Serif', 'Times New Roman', serif;
-      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
 
-      --pad-x: clamp(24px, 6vw, 96px);
-      --section-y: clamp(96px, 14vw, 200px);
-      --content-max: 1280px;
-      --text-max: 720px;
+      --pad-x:        clamp(28px, 5vw, 80px);
+      --section-y:    clamp(120px, 16vw, 220px);
+      --content-max:  1320px;
+      --col-gutter:   24px;
 
-      /* Motion tokens (v2) */
-      --cursor-size-dot: 8px;
-      --cursor-size-ring: 36px;
-      --rail-dot: 7px;
-      --hero-glow-x: 0px;
-      --hero-glow-y: 0px;
+      --font-serif: 'Fraunces', 'Cambria', 'Georgia', 'Times New Roman', serif;
+      --font-mono:  'Geist Mono', ui-monospace, 'SF Mono', 'Menlo', Consolas, monospace;
+
+      --wonk: 0;
     }
 
     /* =========================================================
-       === RESET ==============================================
+       === RESET ===============================================
        ========================================================= */
     *, *::before, *::after { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--font-sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-serif);
       font-size: 17px;
-      line-height: 1.65;
-      font-weight: 400;
+      line-height: 1.55;
+      font-variation-settings: "opsz" 17, "SOFT" 50, "WONK" 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
       overflow-x: hidden;
-      transition: background-color 300ms var(--ease), color 300ms var(--ease);
     }
     img, svg { display: block; max-width: 100%; }
     button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
     a { color: inherit; text-decoration: none; }
-    ::selection { background: var(--accent); color: var(--bg); }
+    h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 400; }
+    p, ul, ol { margin: 0; }
+    ul, ol { list-style: none; padding: 0; }
+    ::selection { background: var(--accent); color: var(--paper); }
 
-    /* Accessible focus */
     :focus { outline: none; }
     :focus-visible {
       outline: 1.5px solid var(--accent);
@@ -90,58 +95,94 @@
       left: -9999px;
       top: 0;
       padding: 8px 14px;
-      background: var(--fg);
-      color: var(--bg);
+      background: var(--ink);
+      color: var(--paper);
       font-family: var(--font-mono);
       font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       z-index: 1000;
     }
     .skip-link:focus { left: 16px; top: 16px; }
 
     /* =========================================================
-       === TYPOGRAPHY =========================================
+       === TYPOGRAPHY ==========================================
        ========================================================= */
     .eyebrow {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--fg-dim);
+      letter-spacing: 0.14em;
+      color: var(--ink-dim);
+      line-height: 1.4;
     }
     .mono { font-family: var(--font-mono); }
-    .serif { font-family: var(--font-serif); }
 
-    h1, h2, h3 { margin: 0; font-weight: 400; }
+    .section-title {
+      font-family: var(--font-serif);
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+      font-size: clamp(36px, 5.5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.022em;
+      max-width: 16ch;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; }
+
+    /* Base metric value (per-role metric stack inside accordion expansions) */
+    .metric-value {
+      font-family: var(--font-serif);
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+      font-size: clamp(40px, 5.2vw, 80px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      font-variant-numeric: tabular-nums;
+      color: var(--ink);
+    }
+    .metric-value.accent { color: var(--accent); }
+    .metric-caption {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
 
     /* =========================================================
-       === LAYOUT =============================================
+       === LAYOUT ==============================================
        ========================================================= */
     .container {
       width: 100%;
       max-width: var(--content-max);
-      margin: 0 auto;
+      margin-inline: auto;
       padding-inline: var(--pad-x);
     }
-    main > section { padding-block: var(--section-y); position: relative; }
+    main > section,
+    footer.contact { padding-block: var(--section-y); position: relative; }
+
     .section-header {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 2.4vw, 32px);
       margin-bottom: clamp(48px, 8vw, 96px);
     }
-    .section-title {
-      font-family: var(--font-serif);
-      font-size: clamp(40px, 6vw, 64px);
-      line-height: 1.02;
-      letter-spacing: -0.02em;
-      max-width: 900px;
+    .section-rule {
+      display: block;
+      width: 33.333%;
+      max-width: 280px;
+      height: 1px;
+      background: var(--rule);
+      transform-origin: left;
+      transform: scaleX(1);
+      transition: transform 700ms var(--ease);
     }
-    .section-title em { font-style: italic; }
-    .hairline { border: 0; height: 1px; background: var(--hairline); margin: 0; }
+    html.js-motion .section-rule { transform: scaleX(0); }
+    html.js-motion .section-rule.is-drawn { transform: scaleX(1); }
 
     /* =========================================================
-       === NAV ================================================
+       === NAV =================================================
        ========================================================= */
     .nav {
       position: fixed;
@@ -155,7 +196,6 @@
       transition: transform 320ms var(--ease);
     }
     .nav.is-hidden { transform: translateY(-110%); }
-
     .nav-inner {
       pointer-events: auto;
       width: 100%;
@@ -179,34 +219,29 @@
       max-width: 720px;
       margin-top: 12px;
       padding: 10px 22px;
-      background: var(--nav-bg);
-      border-color: var(--hairline);
+      background: rgba(19, 16, 12, 0.72);
+      border-color: var(--rule);
       backdrop-filter: blur(20px) saturate(140%);
       -webkit-backdrop-filter: blur(20px) saturate(140%);
     }
     .wordmark {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: -0.01em;
-      color: var(--fg);
+      letter-spacing: 0.04em;
+      color: var(--ink);
     }
     .wordmark .dot { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
     .nav-link {
       font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      color: var(--fg-dim);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--ink-dim);
       text-transform: uppercase;
       position: relative;
       padding: 4px 0;
-      transition: color 200ms var(--ease);
+      transition: color 220ms var(--ease);
     }
     .nav-link::after {
       content: "";
@@ -216,245 +251,201 @@
       background: var(--accent);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 350ms var(--ease);
+      transition: transform 320ms var(--ease);
     }
-    .nav-link:hover { color: var(--fg); }
+    .nav-link:hover { color: var(--ink); }
     .nav-link:hover::after { transform: scaleX(1); }
-
     .menu-toggle {
       display: none;
       font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--fg);
+      color: var(--ink);
       padding: 4px 0;
     }
-
     .mobile-menu {
       position: fixed;
       inset: 0;
       z-index: 99;
-      background: var(--bg);
+      background: var(--paper);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      gap: 32px;
-      padding: 24px;
+      align-items: flex-start;
+      gap: 28px;
+      padding: 24px clamp(28px, 5vw, 80px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 280ms var(--ease);
+      transition: opacity 260ms var(--ease);
     }
     .mobile-menu.is-open { opacity: 1; pointer-events: auto; }
     .mobile-menu .nav-link {
       font-family: var(--font-serif);
-      font-size: 40px;
-      letter-spacing: -0.01em;
+      font-variation-settings: "opsz" 96, "SOFT" 30, "WONK" 0;
+      font-size: clamp(36px, 8vw, 56px);
+      letter-spacing: -0.022em;
       text-transform: none;
-      color: var(--fg);
+      color: var(--ink);
+      line-height: 1.1;
     }
-    .mobile-menu .nav-link::after { bottom: 6px; }
+    .mobile-menu .nav-link::after { bottom: 4px; height: 1px; }
 
     /* =========================================================
-       === HERO ===============================================
+       === HERO ================================================
        ========================================================= */
     .hero {
       min-height: 100vh;
       min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 140px;
-      padding-bottom: 80px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: clamp(48px, 6vw, 96px);
     }
-    .hero::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(calc(-50% + var(--hero-glow-x, 0px)), calc(-50% + var(--hero-glow-y, 0px)));
-      width: 110vw;
-      height: 90vh;
-      max-width: 1600px;
-      background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-      transition: transform 700ms var(--ease-out);
-      will-change: transform;
-    }
-    .hero > .container { position: relative; z-index: 1; }
-
-    /* Site-wide background network visualization (Canvas 2D) */
-    .bg-network {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      animation: bg-network-fade-in 1400ms var(--ease) 300ms forwards;
-    }
-    @keyframes bg-network-fade-in {
-      to { opacity: 1; }
-    }
-
-    .hero-eyebrow {
-      margin-bottom: clamp(32px, 6vw, 56px);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 600ms var(--ease), transform 600ms var(--ease);
-    }
-    .hero.is-loaded .hero-eyebrow {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .hero > .container { position: relative; z-index: 1; padding-top: 30vh; }
+    .hero-content { max-width: 560px; }
+    .hero-eyebrow { margin-bottom: clamp(28px, 4vw, 48px); }
     .hero-headline {
       font-family: var(--font-serif);
-      font-size: clamp(40px, 7vw, 96px);
-      line-height: 1.04;
-      letter-spacing: -0.022em;
-      max-width: 1200px;
-      margin: 0;
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" var(--wonk, 0);
+      font-size: clamp(48px, 7.5vw, 112px);
+      line-height: 1.02;
+      letter-spacing: -0.028em;
+      max-width: 11ch;
+      color: var(--ink);
     }
-    .hero-line { display: block; }
-    .hero-headline .word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(0.4em);
-      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
-      transition-delay: calc(var(--i, 0) * 70ms + 200ms);
-      margin-right: 0.18em;
+    .hero-line {
+      display: block;
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" var(--wonk, 0);
     }
+    .hero-headline .word { display: inline-block; margin-right: 0.18em; }
     .hero-headline .word-last { margin-right: 0; }
-    .hero.is-loaded .hero-headline .word {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .emphasis {
-      font-style: italic;
-      position: relative;
-      display: inline-block;
-    }
-    .emphasis::after {
+    .hero-headline em { font-style: italic; }
+    .hero-headline .emphasis { position: relative; display: inline-block; }
+    .hero-headline .emphasis::after {
       content: "";
       position: absolute;
       left: 0.04em;
       right: 0.16em;
-      bottom: 0.13em;
-      height: 3px;
+      bottom: 0.06em;
+      height: 2px;
       background: var(--accent);
-      transform: scaleX(0);
+      transform: scaleX(1);
       transform-origin: left;
-      transition: transform 700ms var(--ease) 1500ms;
+      transition: transform 700ms var(--ease);
     }
-    .hero.is-loaded .emphasis::after { transform: scaleX(1); }
-
     .hero-supporting {
-      margin-top: clamp(40px, 6vw, 64px);
-      max-width: 620px;
-      font-size: clamp(16px, 1.4vw, 19px);
+      margin-top: 24px;
+      max-width: 52ch;
+      font-size: 17px;
       line-height: 1.55;
-      color: var(--fg-dim);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 600ms var(--ease) 1700ms, transform 600ms var(--ease) 1700ms;
+      color: var(--ink-dim);
     }
-    .hero.is-loaded .hero-supporting {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .scroll-cue {
+    .hero-art-slot {
       position: absolute;
-      left: var(--pad-x);
-      bottom: 32px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--fg-dimmer);
+      top: 0;
+      right: 0;
+      width: 55%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-canvas {
+      display: none;
+      width: 100%;
+      height: 100%;
       opacity: 0;
-      transition: opacity 600ms var(--ease) 2000ms;
+      transition: opacity 600ms var(--ease);
     }
-    .hero.is-loaded .scroll-cue { opacity: 1; }
-    .scroll-cue-line {
-      width: 1px;
-      height: 36px;
-      background: var(--fg-dimmer);
-      position: relative;
-      overflow: hidden;
-    }
-    .scroll-cue-line::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--accent);
-      animation: scroll-pulse 2.4s var(--ease-out) infinite;
-    }
-    @keyframes scroll-pulse {
-      0%   { transform: translateY(-100%); }
-      50%  { transform: translateY(0); }
-      100% { transform: translateY(100%); }
-    }
+    .hero-canvas.is-loaded { opacity: 1; }
+    .hero-svg-fallback { display: block; width: 100%; height: 100%; }
 
     /* =========================================================
-       === WORK (tree) ========================================
+       === WORK ================================================
        ========================================================= */
-    .work-section .section-header { margin-bottom: clamp(64px, 9vw, 120px); }
+    .work-section { --gutter: 80px; }
+    @media (max-width: 768px) {
+      .work-section { --gutter: 44px; }
+    }
 
+    /* Company-level (accordion L1) */
     .company-tree { width: 100%; }
-
-    /* --- Company (level 1) --- */
-    .company { border-top: 1px solid var(--hairline); }
-    .company-tree > .company:last-child { border-bottom: 1px solid var(--hairline); }
-
+    .company {
+      position: relative;
+      border-top: 1px solid var(--rule);
+    }
+    .company:last-child { border-bottom: 1px solid var(--rule); }
+    .company::before {
+      content: "";
+      position: absolute;
+      left: var(--gutter);
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--rule);
+    }
     .company-heading { margin: 0; font-weight: 400; }
-
     .company-toggle {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: clamp(16px, 3vw, 32px);
-      padding-block: clamp(36px, 5vw, 56px);
+      grid-template-columns: var(--gutter) minmax(0, 1fr) auto;
+      align-items: baseline;
+      column-gap: clamp(20px, 3vw, 40px);
+      padding-block: clamp(32px, 4.5vw, 52px);
+      padding-right: clamp(8px, 1.5vw, 16px);
       text-align: left;
-      color: var(--fg);
+      color: var(--ink);
       cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    .company-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      align-self: center;
     }
     .company-headline {
       display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 12px 32px;
+      flex-direction: column;
+      gap: 12px;
       min-width: 0;
     }
     .company-name-text {
       font-family: var(--font-serif);
-      font-size: clamp(40px, 5.5vw, 72px);
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+      font-size: clamp(36px, 5vw, 64px);
       line-height: 1.0;
       letter-spacing: -0.025em;
+      color: var(--ink);
       transition: color 220ms var(--ease);
     }
     .company-meta {
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--fg-dim);
-      white-space: nowrap;
+      color: var(--ink-soft);
     }
-    .company-toggle:hover .company-name-text { color: var(--accent); }
-    .company-toggle:hover .chevron { color: var(--accent); }
+    .company-indicator {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink-dim);
+      line-height: 1;
+      align-self: center;
+      transition: color 220ms var(--ease);
+    }
+    .company-toggle .company-indicator::after { content: "+"; }
+    .company.is-open .company-toggle .company-indicator::after { content: "−"; }
+    .company-toggle:hover .company-name-text,
+    .company-toggle:hover .company-indicator { color: var(--accent); }
+    .company.is-open .company-indicator { color: var(--accent); }
 
-    /* Expand panel (grid-template-rows trick – animates height without measuring) */
     .company-content {
       display: grid;
       grid-template-rows: 0fr;
@@ -465,6 +456,7 @@
       overflow: hidden;
       opacity: 0;
       transition: opacity 320ms var(--ease);
+      padding-bottom: clamp(20px, 3vw, 36px);
     }
     .company.is-open > .company-content { grid-template-rows: 1fr; }
     .company.is-open > .company-content > .company-content-inner {
@@ -472,27 +464,29 @@
       transition-delay: 80ms;
     }
 
-    /* --- Role (level 2) --- */
-    .role-node { border-top: 1px solid var(--hairline); }
+    /* Role (accordion L2) — indented to match the 80px gutter */
+    .role-node {
+      margin-left: var(--gutter);
+      padding-left: clamp(20px, 3vw, 40px);
+      border-top: 1px solid var(--rule);
+    }
     .company-content-inner > .role-node:first-child { border-top: 0; }
-
     .role-heading { margin: 0; font-size: 1em; font-weight: 400; }
-
     .role-toggle {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: start;
       gap: clamp(16px, 3vw, 32px);
-      padding: clamp(24px, 3.4vw, 40px) 0 clamp(24px, 3.4vw, 40px) clamp(20px, 4vw, 56px);
+      padding-block: clamp(24px, 3.4vw, 36px);
       text-align: left;
-      color: var(--fg);
+      color: var(--ink);
       cursor: pointer;
     }
     .role-summary-block {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       min-width: 0;
     }
     .role-summary-top {
@@ -503,31 +497,47 @@
     }
     .role-title-text {
       font-family: var(--font-serif);
-      font-size: clamp(24px, 3vw, 38px);
+      font-variation-settings: "opsz" 96, "SOFT" 40, "WONK" 0;
+      font-size: clamp(22px, 2.6vw, 32px);
       line-height: 1.15;
       letter-spacing: -0.02em;
+      color: var(--ink);
       transition: color 220ms var(--ease);
     }
-    .role-loc { color: var(--fg-dim); font-size: 0.72em; letter-spacing: -0.01em; }
+    .role-loc {
+      color: var(--ink-soft);
+      font-size: 0.72em;
+      letter-spacing: -0.01em;
+    }
     .role-dates {
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--fg-dim);
+      color: var(--ink-soft);
       white-space: nowrap;
     }
     .role-summary-text {
       display: block;
       font-size: clamp(14.5px, 1.15vw, 16px);
       line-height: 1.55;
-      color: var(--fg-dim);
-      max-width: 760px;
+      color: var(--ink-dim);
+      max-width: 60ch;
     }
-    .role-toggle:hover .role-title-text { color: var(--accent); }
-    .role-toggle:hover .chevron { color: var(--accent); }
+    .role-indicator {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--ink-dim);
+      line-height: 1;
+      align-self: center;
+      transition: color 220ms var(--ease);
+    }
+    .role-toggle .role-indicator::after { content: "+"; }
+    .role-node.is-open .role-indicator::after { content: "−"; }
+    .role-toggle:hover .role-title-text,
+    .role-toggle:hover .role-indicator { color: var(--accent); }
+    .role-node.is-open .role-indicator { color: var(--accent); }
 
-    /* Expand panel for role */
     .role-content {
       display: grid;
       grid-template-rows: 0fr;
@@ -538,8 +548,7 @@
       overflow: hidden;
       opacity: 0;
       transition: opacity 320ms var(--ease);
-      padding: 8px 0 clamp(40px, 5vw, 64px) clamp(20px, 4vw, 56px);
-      max-width: var(--text-max);
+      padding: clamp(12px, 2vw, 24px) 0 clamp(36px, 5vw, 60px);
     }
     .role-node.is-open > .role-content { grid-template-rows: 1fr; }
     .role-node.is-open > .role-content > .role-content-inner {
@@ -547,45 +556,72 @@
       transition-delay: 80ms;
     }
 
-    /* --- Bullet (level 3) --- */
-    .bullet-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 clamp(40px, 5vw, 56px) 0;
+    /* Per-role metric stack — vertical 3 rows, hairline between */
+    .role-metrics {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: clamp(40px, 5vw, 56px);
     }
-    .bullet-node { border-top: 1px solid var(--hairline); }
-    .bullet-list .bullet-node:last-child { border-bottom: 1px solid var(--hairline); }
+    .role-metric {
+      display: grid;
+      grid-template-columns: minmax(160px, max-content) minmax(0, 1fr);
+      align-items: baseline;
+      gap: clamp(24px, 5vw, 64px);
+      padding-block: clamp(20px, 3vw, 32px);
+      border-top: 1px solid var(--rule);
+    }
+    .role-metric:last-child { border-bottom: 1px solid var(--rule); }
+    @media (max-width: 640px) {
+      .role-metric { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    }
 
+    /* Bullets (accordion L3) */
+    .bullet-list { margin: 0 0 clamp(40px, 5vw, 56px) 0; }
+    .bullet-node { border-top: 1px solid var(--rule); }
+    .bullet-list .bullet-node:last-child { border-bottom: 1px solid var(--rule); }
     .bullet-heading { margin: 0; font-size: 1em; font-weight: 400; }
-
     .bullet-toggle {
       width: 100%;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       align-items: start;
-      gap: clamp(14px, 2vw, 22px);
+      gap: clamp(14px, 2vw, 24px);
       padding-block: clamp(18px, 2.4vw, 26px);
       text-align: left;
-      color: var(--fg);
+      color: var(--ink);
       cursor: pointer;
     }
     .bullet-number {
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.16em;
-      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
       padding-top: 4px;
       white-space: nowrap;
     }
     .bullet-summary-text {
-      font-size: clamp(15px, 1.18vw, 17px);
+      font-family: var(--font-serif);
+      font-variation-settings: "opsz" 17, "SOFT" 50, "WONK" 0;
+      font-size: clamp(15.5px, 1.18vw, 17.5px);
       line-height: 1.55;
-      color: var(--fg);
+      color: var(--ink);
       min-width: 0;
       transition: color 220ms var(--ease);
     }
-    .bullet-toggle:hover .bullet-summary-text { color: var(--accent); }
-    .bullet-toggle:hover .chevron { color: var(--accent); }
+    .bullet-indicator {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1;
+      align-self: center;
+      transition: color 220ms var(--ease);
+    }
+    .bullet-toggle .bullet-indicator::after { content: "+"; }
+    .bullet-node.is-open .bullet-indicator::after { content: "−"; }
+    .bullet-toggle:hover .bullet-summary-text,
+    .bullet-toggle:hover .bullet-indicator { color: var(--accent); }
+    .bullet-node.is-open .bullet-indicator { color: var(--accent); }
 
     .bullet-content {
       display: grid;
@@ -597,7 +633,7 @@
       overflow: hidden;
       opacity: 0;
       transition: opacity 280ms var(--ease);
-      padding: 0 clamp(12px, 2vw, 24px) clamp(20px, 3vw, 28px) clamp(40px, 4vw, 56px);
+      padding: 0 0 clamp(20px, 3vw, 28px) clamp(28px, 3vw, 40px);
     }
     .bullet-node.is-open > .bullet-content { grid-template-rows: 1fr; }
     .bullet-node.is-open > .bullet-content > .bullet-content-inner {
@@ -606,144 +642,119 @@
     }
     .bullet-full-text {
       font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(16px, 1.3vw, 19px);
-      line-height: 1.5;
-      letter-spacing: -0.005em;
-      color: var(--fg-dim);
+      font-variation-settings: "opsz" 19, "SOFT" 50, "WONK" 0;
+      font-size: clamp(17px, 1.35vw, 19px);
+      line-height: 1.65;
+      letter-spacing: 0;
+      color: var(--ink-dim);
       margin: 0;
-      max-width: 720px;
+      max-width: 60ch;
     }
+    .bullet-full-text em { font-style: italic; }
 
-    /* --- Chevron --- */
-    .chevron {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--fg-dim);
-      transition: color 220ms var(--ease);
-      flex-shrink: 0;
-      align-self: center;
-    }
-    .chevron svg {
-      transition: transform 320ms var(--ease);
-      display: block;
-    }
-    .company.is-open > .company-heading .chevron svg,
-    .role-node.is-open > .role-heading .chevron svg,
-    .bullet-node.is-open > .bullet-heading .chevron svg {
-      transform: rotate(90deg);
-    }
-    .company.is-open > .company-heading .chevron,
-    .role-node.is-open > .role-heading .chevron,
-    .bullet-node.is-open > .bullet-heading .chevron {
-      color: var(--accent);
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(20px, 3vw, 40px);
-      margin-bottom: clamp(40px, 5vw, 56px);
-    }
-    .metric {
-      border-top: 1px solid var(--hairline-strong);
-      padding-top: 18px;
-    }
-    .metric-value {
-      font-family: var(--font-serif);
-      font-size: clamp(40px, 5.2vw, 72px);
-      line-height: 1.0;
-      letter-spacing: -0.025em;
-      color: var(--fg);
-      font-variant-numeric: tabular-nums;
-      margin-bottom: 14px;
-    }
-    .metric-value.accent { color: var(--accent); }
-    .metric-caption {
+    /* Tech list — comma-separated inline Geist Mono (replaces .tech-pills/.pill) */
+    .tech-list {
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fg-dim);
-      line-height: 1.55;
-    }
-
-    .tech-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .pill {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.04em;
-      color: var(--fg-dim);
-      padding: 6px 12px;
-      border: 1px solid var(--hairline-strong);
-      border-radius: 4px;
-      background: transparent;
-      transition: transform 180ms var(--ease), border-color 180ms var(--ease), color 180ms var(--ease);
-    }
-    .pill:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-      color: var(--fg);
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin: 0;
+      max-width: 80ch;
+      text-transform: none;
     }
 
     /* =========================================================
-       === CAPABILITIES =======================================
+       === CAPABILITIES (Skills) ===============================
        ========================================================= */
-    .capabilities-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: clamp(48px, 6vw, 88px) clamp(40px, 5vw, 80px);
+    .capabilities-stack {
+      display: flex;
+      flex-direction: column;
     }
+    .capability-block {
+      display: grid;
+      grid-template-columns: minmax(200px, 1fr) minmax(0, 3fr);
+      column-gap: clamp(40px, 6vw, 96px);
+      align-items: baseline;
+      padding-block: clamp(36px, 5vw, 60px);
+      border-top: 1px solid var(--rule);
+    }
+    .capability-block:last-child { border-bottom: 1px solid var(--rule); }
     .capability-title {
       font-family: var(--font-serif);
-      font-size: clamp(28px, 3vw, 40px);
+      font-variation-settings: "opsz" 96, "SOFT" 30, "WONK" 0;
+      font-size: clamp(24px, 3vw, 38px);
       line-height: 1.1;
       letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      color: var(--ink);
+      margin: 0;
     }
     .capability-list {
-      font-size: clamp(15px, 1.2vw, 17px);
-      line-height: 1.75;
-      color: var(--fg-dim);
+      font-family: var(--font-serif);
+      font-variation-settings: "opsz" 19, "SOFT" 60, "WONK" 0;
+      font-size: clamp(17px, 1.4vw, 20px);
+      line-height: 1.7;
+      color: var(--ink-dim);
       margin: 0;
+      max-width: 56ch;
     }
     .capability-list .dot {
       color: var(--accent);
-      margin: 0 0.4em;
-      opacity: 0.55;
+      margin: 0 0.45em;
+      opacity: 0.7;
+    }
+    @media (max-width: 768px) {
+      .capability-block {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 16px;
+      }
     }
 
     /* =========================================================
-       === ABOUT ==============================================
+       === ABOUT ===============================================
        ========================================================= */
     .about-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: clamp(48px, 7vw, 120px);
+      column-gap: clamp(48px, 7vw, 120px);
+      row-gap: clamp(40px, 6vw, 80px);
       align-items: start;
     }
     .about-prose {
       font-family: var(--font-serif);
-      font-size: clamp(19px, 1.9vw, 26px);
+      font-variation-settings: "opsz" 96, "SOFT" 80, "WONK" 0;
+      font-size: clamp(22px, 2.2vw, 32px);
       line-height: 1.4;
       letter-spacing: -0.015em;
-      color: var(--fg);
-      max-width: 640px;
+      color: var(--ink);
+      max-width: 30ch;
       margin: 0;
     }
-    .about-prose em { font-style: italic; }
-
-    .education-list { list-style: none; padding: 0; margin: 0; }
-    .education-entry {
-      padding-block: 28px;
-      border-top: 1px solid var(--hairline);
+    .about-prose em {
+      font-style: italic;
+      position: relative;
     }
-    .education-entry:last-child { border-bottom: 1px solid var(--hairline); }
+    .about-prose em::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.02em;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: transform 700ms var(--ease);
+    }
+    html.js-motion .about-prose em::after { transform: scaleX(0); }
+    html.js-motion .about-prose em.is-drawn::after { transform: scaleX(1); }
+
+    .education-list { font-family: var(--font-serif); }
+    .education-entry {
+      padding-block: clamp(20px, 3vw, 28px);
+      border-top: 1px solid var(--rule);
+    }
+    .education-entry:last-child { border-bottom: 1px solid var(--rule); }
     .education-row {
       display: flex;
       justify-content: space-between;
@@ -752,63 +763,65 @@
       margin-bottom: 6px;
     }
     .education-school {
+      font-family: var(--font-serif);
       font-size: 17px;
       font-weight: 500;
       letter-spacing: -0.005em;
+      color: var(--ink);
     }
     .education-date {
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--fg-dim);
+      color: var(--ink-soft);
       white-space: nowrap;
     }
     .education-degree {
+      font-family: var(--font-serif);
       font-size: 15px;
-      color: var(--fg-dim);
+      color: var(--ink-dim);
       line-height: 1.55;
     }
-    .education-gpa {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-top: 6px;
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: minmax(0, 1fr); }
+      .about-prose { max-width: none; }
     }
 
     /* =========================================================
-       === CONTACT / FOOTER ===================================
+       === CONTACT / FOOTER ====================================
        ========================================================= */
-    .contact {
-      padding-block: clamp(120px, 16vw, 220px) 48px;
-      border-top: 1px solid var(--hairline);
-    }
+    .contact { padding-block: clamp(120px, 16vw, 220px) 48px; }
     .contact-headline {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: clamp(40px, 7vw, 96px);
-      line-height: 1.04;
-      letter-spacing: -0.022em;
-      max-width: 1100px;
-      margin: 0 0 clamp(64px, 8vw, 104px) 0;
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+      font-size: clamp(48px, 7.5vw, 112px);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      margin: 0 0 clamp(48px, 8vw, 96px) 0;
+      max-width: 16ch;
+      color: var(--ink);
     }
     .contact-links {
       display: flex;
       flex-direction: column;
-      gap: clamp(6px, 1.2vw, 14px);
+      gap: clamp(8px, 1.4vw, 18px);
       margin-bottom: clamp(80px, 10vw, 140px);
     }
     .contact-link {
       font-family: var(--font-serif);
-      font-size: clamp(32px, 5vw, 56px);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--fg);
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+      font-size: clamp(36px, 5.5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.022em;
+      color: var(--ink);
       position: relative;
-      display: inline-block;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.2em;
       width: fit-content;
+      transition: color 220ms var(--ease);
     }
     .contact-link::after {
       content: "";
@@ -820,9 +833,23 @@
       background: var(--accent);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 400ms var(--ease);
+      transition: transform 360ms var(--ease);
     }
+    .contact-link:hover { color: var(--accent); }
     .contact-link:hover::after { transform: scaleX(1); }
+    .link-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.42em;
+      letter-spacing: 0;
+      color: var(--ink-soft);
+      display: inline-block;
+      transform: translate(0, 0);
+      transition: transform 240ms var(--ease), color 240ms var(--ease);
+    }
+    .contact-link:hover .link-arrow {
+      transform: translate(4px, -4px);
+      color: var(--accent);
+    }
 
     .footer-meta {
       display: flex;
@@ -830,371 +857,50 @@
       align-items: flex-end;
       gap: 24px;
       padding-top: 32px;
-      border-top: 1px solid var(--hairline);
+      margin-top: clamp(48px, 8vw, 96px);
+      border-top: 1px solid var(--rule);
       font-family: var(--font-mono);
       font-size: 11px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--fg-dim);
+      color: var(--ink-dim);
     }
 
     /* =========================================================
-       === MOTION / REVEALS ===================================
+       === MOTION (js-motion gated initial states) =============
        ========================================================= */
-    .reveal {
+    /* Reveal targets: section eyebrows + titles, companies,
+       capability blocks, about prose, education entries, contact links.
+       These elements carry the .reveal class statically in markup, so the
+       initial hidden state applies before first paint when js-motion is on. */
+    html.js-motion .reveal {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(12px);
       transition: opacity 700ms var(--ease), transform 700ms var(--ease);
     }
-    .reveal.is-visible {
+    html.js-motion .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .reveal[data-delay="1"] { transition-delay: 80ms; }
-    .reveal[data-delay="2"] { transition-delay: 160ms; }
-    .reveal[data-delay="3"] { transition-delay: 240ms; }
 
-    /* =========================================================
-       === v2 MOTION ==========================================
-       ========================================================= */
-
-    /* Scroll progress bar (F1) */
-    #scroll-progress {
-      position: fixed;
-      top: 0; left: 0;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent) 35%, var(--accent));
-      z-index: 200;
-      pointer-events: none;
-      will-change: width;
+    /* Hero settle: lines start hidden, GSAP tweens opacity + --wonk per line.
+       After last line lands, .hero gets .is-settled → emphasis underline draws. */
+    html.js-motion .hero-headline .hero-line { opacity: 0; }
+    html.js-motion .hero-headline .emphasis::after { transform: scaleX(0); }
+    html.js-motion .hero.is-settled .hero-headline .emphasis::after {
+      transform: scaleX(1);
+      transition: transform 700ms var(--ease) 100ms;
     }
 
-    /* Grain overlay (F4) — cheap tiled noise, no blend mode */
-    .grain-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      background-size: 180px 180px;
-    }
-
-    /* Stack main content above background layers */
-    main, .contact { position: relative; z-index: 1; }
-
-    /* Custom cursor (F3) */
-    html.has-custom-cursor,
-    html.has-custom-cursor body,
-    html.has-custom-cursor a,
-    html.has-custom-cursor button,
-    html.has-custom-cursor .pill { cursor: none; }
-    .cursor-dot, .cursor-ring {
-      position: fixed;
-      top: 0; left: 0;
-      pointer-events: none;
-      z-index: 300;
-      will-change: transform;
-      opacity: 0;
-      transition: opacity 220ms var(--ease);
-    }
-    html.has-custom-cursor .cursor-dot,
-    html.has-custom-cursor .cursor-ring { opacity: 1; }
-    .cursor-dot {
-      width: var(--cursor-size-dot);
-      height: var(--cursor-size-dot);
-      background: var(--accent);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .cursor-ring {
-      width: var(--cursor-size-ring);
-      height: var(--cursor-size-ring);
-      border: 1.5px solid var(--accent);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 240ms var(--ease), height 240ms var(--ease), opacity 220ms var(--ease), border-color 240ms var(--ease);
-    }
-    html.cursor-hover .cursor-ring {
-      width: calc(var(--cursor-size-ring) * 1.65);
-      height: calc(var(--cursor-size-ring) * 1.65);
-    }
-    html.cursor-hover .cursor-dot { transform: translate(-50%, -50%) scale(0.6); }
-
-    /* Section rail (F2) */
-    .section-rail {
-      position: fixed;
-      right: clamp(20px, 2.4vw, 36px);
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 90;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      align-items: center;
-      pointer-events: auto;
-    }
-    .section-rail-line {
-      width: 1px;
-      height: 56px;
-      background: var(--hairline-strong);
-      position: relative;
-      overflow: hidden;
-    }
-    .section-rail-line::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--accent);
-      transform-origin: top;
-      transform: scaleY(var(--rail-progress, 0));
-      transition: transform 240ms var(--ease-out);
-    }
-    .section-rail-dot {
-      width: var(--rail-dot);
-      height: var(--rail-dot);
-      border-radius: 50%;
-      background: var(--fg-dimmer);
-      transition: background 220ms var(--ease), transform 220ms var(--ease);
-      cursor: pointer;
-      position: relative;
-    }
-    .section-rail-dot::before {
-      content: attr(data-label);
-      position: absolute;
-      right: 18px;
-      top: 50%;
-      transform: translateY(-50%) translateX(6px);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      color: var(--fg-dim);
-      text-transform: uppercase;
-      opacity: 0;
-      pointer-events: none;
-      white-space: nowrap;
-      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
-    }
-    .section-rail-dot:hover::before {
-      opacity: 1;
-      transform: translateY(-50%) translateX(0);
-    }
-    .section-rail-dot.is-active {
-      background: var(--accent);
-      transform: scale(1.55);
-    }
-
-    /* Active eyebrow pulse (F22) */
-    .eyebrow.is-active::before {
-      content: "";
+    /* Contact headline word spans — each word gets its own --wonk during stagger pulse */
+    .contact-headline .word {
       display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin-right: 10px;
-      vertical-align: middle;
-      animation: eyebrow-pulse 2.4s var(--ease-out) infinite;
-      transform: translateY(-1px);
+      font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" var(--wonk, 0);
     }
-    @keyframes eyebrow-pulse {
-      0%, 100% { transform: translateY(-1px) scale(1); opacity: 1; }
-      50%      { transform: translateY(-1px) scale(1.55); opacity: 0.55; }
-    }
-
-    /* Animated section divider (F21) */
-    .section-divider {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 800ms var(--ease-out);
-      margin: 0;
-      border: 0;
-      opacity: 0.6;
-    }
-    .section-divider.is-drawn { transform: scaleX(1); }
-
-    /* Tilt cards (F15) */
-    .tilt-card {
-      transform-style: preserve-3d;
-      transition: transform 320ms var(--ease-out);
-      will-change: transform;
-    }
-    .tilt-card .capability-title,
-    .tilt-card .capability-list {
-      transform: translateZ(0);
-      transition: transform 320ms var(--ease-out);
-    }
-    .tilt-card:hover .capability-title { transform: translateZ(20px); }
-    .tilt-card:hover .capability-list { transform: translateZ(10px); }
-
-    /* Capability token reveal (F16) */
-    .capability-list .token { display: inline-block; }
-
-    /* Role char/word reveal (F11, F17) */
-    .reveal-char .char,
-    .reveal-word .word { display: inline-block; }
-
-    /* Contact link micro-pull (F19) */
-    .contact-link {
-      transition: transform 500ms var(--ease-out), color 220ms var(--ease);
-    }
-    .contact-link:hover { transform: translateX(10px); color: var(--accent); }
-
-    /* Contact headline curtain (F20) */
-    .contact-headline.curtain {
-      clip-path: inset(0 0 100% 0);
-      transition: clip-path 900ms var(--ease-out);
-    }
-    .contact-headline.curtain.is-open { clip-path: inset(0 0 0 0); }
-
-    /* Pill cascade (F13) — GSAP handles will-change at runtime */
-
-    /* Tech list token containers — preserve dot styling */
-    .capability-list .token + .dot { margin-left: 0; }
-
-    /* Sticky section eyebrow rail (F9) — desktop only */
-    .work-section { position: relative; }
-
-    /* Surfaced headline metrics strip (top of work section) */
-    .proof-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(20px, 3vw, 40px);
-      margin: 0 0 clamp(64px, 9vw, 120px) 0;
-    }
-    .proof-metric {
-      display: block;
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: 0;
-      border-top: 1px solid var(--hairline-strong);
-      padding: 18px 0 6px 0;
-      position: relative;
-      cursor: pointer;
-      color: inherit;
-      transition: border-color 240ms var(--ease);
-    }
-    .proof-metric .metric-value {
-      display: block;
-      font-family: var(--font-serif);
-      font-size: clamp(40px, 5.2vw, 72px);
-      line-height: 1.0;
-      letter-spacing: -0.025em;
-      color: var(--fg);
-      font-variant-numeric: tabular-nums;
-      margin-bottom: 14px;
-      transition: color 240ms var(--ease), transform 320ms var(--ease-out);
-    }
-    .proof-metric .metric-value.accent { color: var(--accent); }
-    .proof-metric .metric-caption {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fg-dim);
-      line-height: 1.55;
-      transition: color 240ms var(--ease);
-    }
-    .proof-metric-chevron {
-      position: absolute;
-      top: 22px;
-      right: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--fg-dimmer);
-      opacity: 0;
-      transform: translateY(-4px);
-      transition: opacity 240ms var(--ease), transform 240ms var(--ease), color 240ms var(--ease);
-      pointer-events: none;
-    }
-    .proof-metric:hover {
-      border-top-color: var(--accent);
-    }
-    .proof-metric:hover .metric-value:not(.accent) { color: var(--accent); }
-    .proof-metric:hover .metric-caption { color: var(--fg); }
-    .proof-metric:hover .proof-metric-chevron,
-    .proof-metric:focus-visible .proof-metric-chevron {
-      opacity: 1;
-      transform: translateY(0);
-      color: var(--accent);
-    }
-
-    /* Bullet-arrival flash (from metric click) */
-    @keyframes bullet-arrival-flash {
-      0%   { background: var(--accent-soft); }
-      100% { background: transparent; }
-    }
-    .bullet-node.is-arrival > .bullet-heading .bullet-toggle {
-      animation: bullet-arrival-flash 1400ms var(--ease-out);
-    }
-
-    @media (max-width: 640px) {
-      .proof-metrics {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 28px;
-      }
-    }
-
-    /* Work section visual spine (desktop only) */
-    .work-spine {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: calc(var(--pad-x) - 22px);
-      width: 8px;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .work-spine-line,
-    .work-spine-fill {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      margin-left: -0.5px;
-    }
-    .work-spine-line {
-      background: var(--hairline-strong);
-      opacity: 0.7;
-    }
-    .work-spine-fill {
-      background: var(--accent);
-      transform-origin: top;
-      transform: scaleY(var(--spine-progress, 0));
-    }
-    .work-spine-node {
-      position: absolute;
-      left: 50%;
-      width: 7px;
-      height: 7px;
-      margin-left: -3.5px;
-      margin-top: -3.5px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 1px solid var(--hairline-strong);
-      transition: background 240ms var(--ease), border-color 240ms var(--ease), transform 280ms var(--ease-out);
-      will-change: transform;
-    }
-    .work-spine-node.is-active {
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: scale(1.35);
-    }
-    @media (max-width: 1024px) {
-      .work-spine { display: none; }
-    }
+    html.js-motion .contact-headline .word { opacity: 0; }
 
     /* =========================================================
-       === REDUCED MOTION =====================================
+       === REDUCED MOTION (umbrella) ===========================
        ========================================================= */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -1204,78 +910,69 @@
         transition-delay: 0ms !important;
         scroll-behavior: auto !important;
       }
-      .hero-headline .word,
-      .hero-eyebrow,
-      .hero-supporting,
-      .scroll-cue,
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .emphasis::after { transform: scaleX(1) !important; }
-      .scroll-cue-line::after { animation: none !important; }
-      .grain-overlay,
-      .cursor-dot,
-      .cursor-ring { display: none !important; }
-      .section-divider { transform: scaleX(1) !important; }
-      .contact-headline.curtain { clip-path: none !important; }
-      .reveal-char .char,
-      .reveal-word .word { opacity: 1 !important; transform: none !important; }
+      .section-rule { transform: scaleX(1) !important; }
+      .hero-headline .emphasis::after { transform: scaleX(1) !important; }
+      .about-prose em::after { transform: scaleX(1) !important; }
     }
 
     /* =========================================================
-       === RESPONSIVE =========================================
+       === RESPONSIVE ==========================================
        ========================================================= */
     @media (max-width: 1024px) {
-      .about-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .capabilities-grid {
-        gap: 56px 48px;
-      }
-      .section-rail { display: none; }
-      .cursor-dot, .cursor-ring { display: none; }
-      html.has-custom-cursor,
-      html.has-custom-cursor body,
-      html.has-custom-cursor a,
-      html.has-custom-cursor button,
-      html.has-custom-cursor .pill { cursor: auto; }
-    }
-
-    @media (max-width: 640px) {
-      body { font-size: 16px; }
       .nav-links { display: none; }
       .menu-toggle { display: inline-flex; align-items: center; gap: 8px; }
-      .nav.is-scrolled .nav-inner { max-width: none; margin-inline: 16px; }
+      .nav.is-scrolled .nav-inner { max-width: none; }
+    }
 
-      .hero { padding-top: 120px; }
-      .hero-headline .word { margin-right: 0.15em; }
-      .scroll-cue { left: 24px; bottom: 24px; }
-
-      .metrics {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 28px;
+    @media (max-width: 768px) {
+      body { font-size: 16px; }
+      .hero {
+        padding-top: 96px;
+        align-items: stretch;
       }
-      .capabilities-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 48px;
-      }
-      .footer-meta {
+      .hero > .container {
+        padding-top: 0;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+        gap: clamp(32px, 6vw, 56px);
       }
-      .education-row { flex-wrap: wrap; }
+      .hero-art-slot {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        order: -1;
+      }
+      .hero-content { max-width: 100%; }
+      .hero-supporting { max-width: 100%; }
+      .company-toggle {
+        grid-template-columns: var(--gutter) minmax(0, 1fr);
+        row-gap: 14px;
+      }
+      .company-toggle .company-indicator {
+        grid-column: 1 / -1;
+        justify-self: end;
+      }
+      .footer-meta { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
   </style>
+
+  <!-- Open all accordion panels for users with JS disabled, so every word remains readable. -->
+  <noscript>
+    <style>
+      .company-content,
+      .role-content,
+      .bullet-content { grid-template-rows: 1fr !important; }
+      .company-content-inner,
+      .role-content-inner,
+      .bullet-content-inner { opacity: 1 !important; }
+      .company-indicator,
+      .role-indicator,
+      .bullet-indicator { display: none !important; }
+    </style>
+  </noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- v2 motion chrome (purely decorative, JS-driven) -->
-  <div id="scroll-progress" aria-hidden="true"></div>
-  <canvas class="bg-network" aria-hidden="true"></canvas>
-  <div class="grain-overlay" aria-hidden="true"></div>
 
   <!-- =================== NAV =================== -->
   <header class="nav" id="nav" aria-label="Site header">
@@ -1297,7 +994,6 @@
     </div>
   </header>
 
-  <!-- mobile overlay menu -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
     <a href="#work" class="nav-link" data-close-menu>Work</a>
     <a href="#skills" class="nav-link" data-close-menu>Skills</a>
@@ -1310,91 +1006,74 @@
 
     <!-- =================== HERO =================== -->
     <section class="hero" id="hero" aria-label="Introduction">
-      <div class="container">
-        <p class="eyebrow hero-eyebrow">AI Engineer · San Francisco · Available for Work</p>
-
-        <h1 class="hero-headline">
-          <span class="hero-line">
-            <span class="word" style="--i:0">I</span><span class="word" style="--i:1">find</span><span class="word" style="--i:2">where</span><span class="word" style="--i:3">your</span><span class="word" style="--i:4">systems</span><span class="word" style="--i:5">are</span><span class="word" style="--i:6">not</span><span class="word" style="--i:7">optimizing</span>
-          </span>
-          <span class="hero-line">
-            <em><span class="word" style="--i:8">and</span><span class="word" style="--i:9">rebuild</span><span class="word" style="--i:10">them</span><span class="word" style="--i:11">with</span></em><em class="emphasis"><span class="word" style="--i:12">AI</span><span class="word" style="--i:13">that</span><span class="word word-last" style="--i:14">does.</span></em>
-          </span>
-        </h1>
-
-        <p class="hero-supporting">
-          Currently at Onpoint Insights, where I'm an AI Engineer building an automated medical coding pipeline &mdash; government compliant and grounded in authoritative CMS sources &mdash; for a healthcare client. With this, we aim to target a market projected to reach $8.4B by 2033. Before this, I have designed and shipped multi-agent LLM systems, RAG architectures, recommendation engines, causal models, OCR workflows, forecasting models, and NLP systems across healthcare, pharma, and retail.
-        </p>
+      <div class="hero-art-slot" aria-hidden="true">
+        <canvas class="hero-canvas"></canvas>
+        <svg class="hero-svg-fallback" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <filter id="hero-fallback-shape" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="18" />
+            </filter>
+          </defs>
+          <!-- Dark-mode: drop the feColorMatrix that crushed toward ink. Bump opacity so
+               terracotta reads against the dark bg the way it read against paper. -->
+          <g filter="url(#hero-fallback-shape)" fill="#C9512A" fill-opacity="0.55">
+            <circle cx="250" cy="280" r="110" />
+            <circle cx="350" cy="320" r="95"  />
+            <circle cx="300" cy="240" r="120" />
+          </g>
+        </svg>
       </div>
 
-      <div class="scroll-cue" aria-hidden="true">
-        <span>scroll</span>
-        <span class="scroll-cue-line"></span>
+      <div class="container">
+        <div class="hero-content">
+          <p class="eyebrow hero-eyebrow">AI Engineer · San Francisco · Available for Work</p>
+
+          <h1 class="hero-headline">
+            <span class="hero-line">
+              <span class="word" style="--i:0">I</span><span class="word" style="--i:1">find</span><span class="word" style="--i:2">where</span><span class="word" style="--i:3">your</span><span class="word" style="--i:4">systems</span><span class="word" style="--i:5">are</span><span class="word" style="--i:6">not</span><span class="word" style="--i:7">optimizing</span>
+            </span>
+            <span class="hero-line">
+              <em><span class="word" style="--i:8">and</span><span class="word" style="--i:9">rebuild</span><span class="word" style="--i:10">them</span><span class="word" style="--i:11">with</span></em><em class="emphasis"><span class="word" style="--i:12">AI</span><span class="word" style="--i:13">that</span><span class="word word-last" style="--i:14">does.</span></em>
+            </span>
+          </h1>
+
+          <p class="hero-supporting">
+            Currently at Onpoint Insights, where I'm an AI Engineer building an automated medical coding pipeline, government compliant and grounded in authoritative CMS sources, for a healthcare client. With this, we aim to target a market projected to reach $8.4B by 2033. Before this, I have designed and shipped multi-agent LLM systems, RAG architectures, recommendation engines, causal models, OCR workflows, forecasting models, and NLP systems across healthcare, pharma, and retail.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- =================== WORK =================== -->
     <section class="work-section" id="work" aria-labelledby="work-heading">
-      <div class="work-spine" aria-hidden="true">
-        <span class="work-spine-line"></span>
-        <span class="work-spine-fill"></span>
-      </div>
       <div class="container">
         <header class="section-header">
+          <span class="section-rule" aria-hidden="true"></span>
           <p class="eyebrow reveal">01 – Selected Work</p>
-          <h2 class="section-title reveal" data-delay="1" id="work-heading">
+          <h2 class="section-title reveal" id="work-heading">
             Three companies. Five roles. One thread: <em>I always left the system smarter than I found it.</em>
           </h2>
         </header>
 
-        <div class="proof-metrics reveal" aria-label="Headline results">
-          <button class="proof-metric" type="button" data-target-bullet="bullet-ai-3"
-                  aria-label="View work: 7.66 percent coding error rate, below 10 to 20 percent industry standard">
-            <span class="metric-value accent" data-value="7.66%">0%</span>
-            <span class="metric-caption">Coding error rate vs<br />10–20% industry standard</span>
-            <span class="proof-metric-chevron" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
-            </span>
-          </button>
-          <button class="proof-metric" type="button" data-target-bullet="bullet-ai-4"
-                  aria-label="View work: two-stage pipeline, 3 times more accurate than baseline">
-            <span class="metric-value" data-value="3×">0×</span>
-            <span class="metric-caption">More accurate than<br />a standard LLM baseline</span>
-            <span class="proof-metric-chevron" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
-            </span>
-          </button>
-          <button class="proof-metric" type="button" data-target-bullet="bullet-ai-1"
-                  aria-label="View work: medical coding pipeline targeting 8.4 billion dollar market">
-            <span class="metric-value" data-value="$8.4B">$0B</span>
-            <span class="metric-caption">Market projected by<br />2033 in medical coding</span>
-            <span class="proof-metric-chevron" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
-            </span>
-          </button>
-        </div>
-
+        <!-- Company tree -->
         <div class="company-tree">
 
-          <!-- Company: Onpoint Insights -->
+          <!-- Company 1: Onpoint Insights -->
           <div class="company reveal">
             <h3 class="company-heading">
               <button class="company-toggle" type="button" aria-expanded="false" aria-controls="company-onpoint-panel">
+                <span class="company-number">01</span>
                 <span class="company-headline">
                   <span class="company-name-text">Onpoint Insights</span>
                   <span class="company-meta">3 Roles · May 2024 – Present</span>
                 </span>
-                <span class="chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 6 15 12 9 18" />
-                  </svg>
-                </span>
+                <span class="company-indicator" aria-hidden="true"></span>
               </button>
             </h3>
             <div class="company-content" id="company-onpoint-panel">
               <div class="company-content-inner">
 
-                <!-- Role: AI Engineer -->
+                <!-- Role 1: AI Engineer -->
                 <article class="role-node">
                   <h4 class="role-heading">
                     <button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-ai-engineer-panel">
@@ -1405,26 +1084,22 @@
                         </span>
                         <span class="role-summary-text">Researched, architected, and shipped a government compliant automated medical coding pipeline as an AI Engineer for a healthcare client</span>
                       </span>
-                      <span class="chevron" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="9 6 15 12 9 18" />
-                        </svg>
-                      </span>
+                      <span class="role-indicator" aria-hidden="true"></span>
                     </button>
                   </h4>
                   <div class="role-content" id="role-ai-engineer-panel">
                     <div class="role-content-inner">
-                      <div class="metrics">
-                        <div class="metric">
-                          <div class="metric-value accent" data-value="7.66%">0%</div>
+                      <div class="role-metrics">
+                        <div class="role-metric">
+                          <div class="metric-value accent" data-value="7.66%">7.66%</div>
                           <div class="metric-caption">Coding error rate,<br />well below the 10–20%<br />industry standard</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="3×">0×</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="3×">3×</div>
                           <div class="metric-caption">More accurate than<br />a standard baseline</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="$8.4B">$0B</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="$8.4B">$8.4B</div>
                           <div class="metric-caption">Market we are targeting<br />in medical coding</div>
                         </div>
                       </div>
@@ -1435,9 +1110,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ai-1">
                               <span class="bullet-number">01</span>
                               <span class="bullet-summary-text">Delivered an automated medical coding pipeline in 2 months, owning the project end to end as an AI Engineer.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ai-1">
@@ -1451,9 +1124,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ai-2">
                               <span class="bullet-number">02</span>
                               <span class="bullet-summary-text">Identified a flawed LLM baseline sitting below 70% accuracy before it became the foundation of the entire system.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ai-2">
@@ -1467,9 +1138,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ai-3">
                               <span class="bullet-number">03</span>
                               <span class="bullet-summary-text">Built a retrieval system grounded in government sources, achieving 7.66% error rate vs a 10–20% industry baseline.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ai-3">
@@ -1483,9 +1152,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ai-4">
                               <span class="bullet-number">04</span>
                               <span class="bullet-summary-text">Designed a two stage AI pipeline that tripled prediction accuracy over a standard LLM approach.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ai-4">
@@ -1499,9 +1166,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ai-5">
                               <span class="bullet-number">05</span>
                               <span class="bullet-summary-text">Embedded Medicaid and Medicare compliance rules directly into the pipeline to handle government payer requirements.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ai-5">
@@ -1512,23 +1177,12 @@
                         </li>
                       </ul>
 
-                      <div class="tech-pills">
-                        <span class="pill">Python</span>
-                        <span class="pill">RAG</span>
-                        <span class="pill">Vector Databases</span>
-                        <span class="pill">LLMs</span>
-                        <span class="pill">ICD-10</span>
-                        <span class="pill">CPT</span>
-                        <span class="pill">Retrieval Architecture</span>
-                        <span class="pill">Medical Coding</span>
-                        <span class="pill">Healthcare AI</span>
-                        <span class="pill">Government Compliance</span>
-                      </div>
+                      <p class="tech-list">Python, RAG, Vector Databases, LLMs, ICD-10, CPT, Retrieval Architecture, Medical Coding, Healthcare AI, Government Compliance</p>
                     </div>
                   </div>
                 </article>
 
-                <!-- Role: Data Scientist -->
+                <!-- Role 2: Data Scientist -->
                 <article class="role-node">
                   <h4 class="role-heading">
                     <button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-data-scientist-panel">
@@ -1539,26 +1193,22 @@
                         </span>
                         <span class="role-summary-text">Built and shipped AI pipelines that automated data workflows and improved decision making across pharma and retail clients.</span>
                       </span>
-                      <span class="chevron" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="9 6 15 12 9 18" />
-                        </svg>
-                      </span>
+                      <span class="role-indicator" aria-hidden="true"></span>
                     </button>
                   </h4>
                   <div class="role-content" id="role-data-scientist-panel">
                     <div class="role-content-inner">
-                      <div class="metrics">
-                        <div class="metric">
-                          <div class="metric-value accent" data-value="40%">0%</div>
+                      <div class="role-metrics">
+                        <div class="role-metric">
+                          <div class="metric-value accent" data-value="40%">40%</div>
                           <div class="metric-caption">Reduction in analyst effort by automating data workflows</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="17%">0%</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="17%">17%</div>
                           <div class="metric-caption">More accurate answers over a standard search baseline</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="4.2%">0%</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="4.2%">4.2%</div>
                           <div class="metric-caption">Better return on campaign spend through causal modeling</div>
                         </div>
                       </div>
@@ -1569,9 +1219,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ds-1">
                               <span class="bullet-number">01</span>
                               <span class="bullet-summary-text">Built a multi-agent LLM pipeline to query 20K+ records, cutting analyst effort by 40%.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ds-1">
@@ -1585,9 +1233,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ds-2">
                               <span class="bullet-number">02</span>
                               <span class="bullet-summary-text">Designed a RAG assistant over 20+ documents, outperforming standard search question answering by 17%.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ds-2">
@@ -1601,9 +1247,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ds-3">
                               <span class="bullet-number">03</span>
                               <span class="bullet-summary-text">Ran causal regression models for a top-3 pharma client, delivering a 4.2% ROI lift.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ds-3">
@@ -1617,9 +1261,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-ds-4">
                               <span class="bullet-number">04</span>
                               <span class="bullet-summary-text">Deployed an OCR workflow to extract data from PDF invoices, achieving 92% accuracy.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-ds-4">
@@ -1630,22 +1272,12 @@
                         </li>
                       </ul>
 
-                      <div class="tech-pills">
-                        <span class="pill">Multi-Agent Systems</span>
-                        <span class="pill">OCR</span>
-                        <span class="pill">Causal Modeling</span>
-                        <span class="pill">NLP</span>
-                        <span class="pill">Azure</span>
-                        <span class="pill">Statistical Analysis</span>
-                        <span class="pill">Power Automate</span>
-                        <span class="pill">SQL</span>
-                        <span class="pill">Databricks</span>
-                      </div>
+                      <p class="tech-list">Multi-Agent Systems, OCR, Causal Modeling, NLP, Azure, Statistical Analysis, Power Automate, SQL, Databricks</p>
                     </div>
                   </div>
                 </article>
 
-                <!-- Role: Data Science Intern (Onpoint) -->
+                <!-- Role 3: Data Science Intern (Onpoint) -->
                 <article class="role-node">
                   <h4 class="role-heading">
                     <button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-onpoint-intern-panel">
@@ -1656,26 +1288,22 @@
                         </span>
                         <span class="role-summary-text">Built data and ML systems to improve product recommendations, data consistency, and sales forecasting across retail and supply chain operations.</span>
                       </span>
-                      <span class="chevron" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="9 6 15 12 9 18" />
-                        </svg>
-                      </span>
+                      <span class="role-indicator" aria-hidden="true"></span>
                     </button>
                   </h4>
                   <div class="role-content" id="role-onpoint-intern-panel">
                     <div class="role-content-inner">
-                      <div class="metrics">
-                        <div class="metric">
-                          <div class="metric-value" data-value="10M+">0M+</div>
+                      <div class="role-metrics">
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="10M+">10M+</div>
                           <div class="metric-caption">Transaction records extracted to build a hybrid recommendation system</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value accent" data-value="6.7%">0%</div>
+                        <div class="role-metric">
+                          <div class="metric-value accent" data-value="6.7%">6.7%</div>
                           <div class="metric-caption">Lift in average order size by building a hybrid recommendation system</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="12%">0%</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="12%">12%</div>
                           <div class="metric-caption">Error rate on sales forecasting, well within industry acceptable range</div>
                         </div>
                       </div>
@@ -1686,9 +1314,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-onint-1">
                               <span class="bullet-number">01</span>
                               <span class="bullet-summary-text">Built a hybrid recommendation system over 10M+ records, driving a 6.7% lift in Average Order Size.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-onint-1">
@@ -1702,9 +1328,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-onint-2">
                               <span class="bullet-number">02</span>
                               <span class="bullet-summary-text">Built an NLP based entity resolution system to reconcile partial company names, reducing reporting inconsistencies.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-onint-2">
@@ -1718,9 +1342,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-onint-3">
                               <span class="bullet-number">03</span>
                               <span class="bullet-summary-text">Built sales forecasting models achieving a 12% error rate to support inventory and production planning.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-onint-3">
@@ -1731,16 +1353,7 @@
                         </li>
                       </ul>
 
-                      <div class="tech-pills">
-                        <span class="pill">Python</span>
-                        <span class="pill">NLP</span>
-                        <span class="pill">Recommendation Systems</span>
-                        <span class="pill">Time Series Forecasting</span>
-                        <span class="pill">Entity Resolution</span>
-                        <span class="pill">Power BI</span>
-                        <span class="pill">Vector Similarity</span>
-                        <span class="pill">SQL</span>
-                      </div>
+                      <p class="tech-list">Python, NLP, Recommendation Systems, Time Series Forecasting, Entity Resolution, Power BI, Vector Similarity, SQL</p>
                     </div>
                   </div>
                 </article>
@@ -1749,25 +1362,22 @@
             </div>
           </div>
 
-          <!-- Company: Conagra Brands -->
-          <div class="company reveal" data-delay="1">
+          <!-- Company 2: Conagra Brands -->
+          <div class="company reveal">
             <h3 class="company-heading">
               <button class="company-toggle" type="button" aria-expanded="false" aria-controls="company-conagra-panel">
+                <span class="company-number">02</span>
                 <span class="company-headline">
                   <span class="company-name-text">Conagra Brands</span>
                   <span class="company-meta">1 Role · Jan 2024 – May 2024</span>
                 </span>
-                <span class="chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 6 15 12 9 18" />
-                  </svg>
-                </span>
+                <span class="company-indicator" aria-hidden="true"></span>
               </button>
             </h3>
             <div class="company-content" id="company-conagra-panel">
               <div class="company-content-inner">
 
-                <!-- Role: Student Consultant, Data Scientist -->
+                <!-- Role 4: Student Consultant, Data Scientist -->
                 <article class="role-node">
                   <h4 class="role-heading">
                     <button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-conagra-consultant-panel">
@@ -1778,26 +1388,22 @@
                         </span>
                         <span class="role-summary-text">Built analytical frameworks across pricing, promotion, and consumer demand to drive growth strategy and optimize spend for Conagra's Meat Substitutes category.</span>
                       </span>
-                      <span class="chevron" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="9 6 15 12 9 18" />
-                        </svg>
-                      </span>
+                      <span class="role-indicator" aria-hidden="true"></span>
                     </button>
                   </h4>
                   <div class="role-content" id="role-conagra-consultant-panel">
                     <div class="role-content-inner">
-                      <div class="metrics">
-                        <div class="metric">
-                          <div class="metric-value accent" data-value="7%">0%</div>
+                      <div class="role-metrics">
+                        <div class="role-metric">
+                          <div class="metric-value accent" data-value="7%">7%</div>
                           <div class="metric-caption">Projected sales uplift in Conagra's Meat Substitutes from optimized strategy</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="$80K">$0K</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="$80K">$80K</div>
                           <div class="metric-caption">Cost savings unlocked through promotional spend reallocation</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="100+">0+</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="100+">100+</div>
                           <div class="metric-caption">Product attributes analyzed across 4 years of regional sales data</div>
                         </div>
                       </div>
@@ -1808,9 +1414,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-conagra-1">
                               <span class="bullet-number">01</span>
                               <span class="bullet-summary-text">Analyzed Meat Substitutes sales across U.S. regions, projecting a 7% sales uplift from region-specific pricing and product strategy.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-conagra-1">
@@ -1824,9 +1428,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-conagra-2">
                               <span class="bullet-number">02</span>
                               <span class="bullet-summary-text">Built Clout and Vulnerability Maps to benchmark plant-based brands, driving promotion reallocation and cost savings.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-conagra-2">
@@ -1840,9 +1442,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-conagra-3">
                               <span class="bullet-number">03</span>
                               <span class="bullet-summary-text">Analyzed supermarket scanner data, addressing statistical challenges to enable reliable causal inference.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-conagra-3">
@@ -1853,17 +1453,7 @@
                         </li>
                       </ul>
 
-                      <div class="tech-pills">
-                        <span class="pill">Python</span>
-                        <span class="pill">SAS</span>
-                        <span class="pill">Pricing Strategy</span>
-                        <span class="pill">Promotion Optimization</span>
-                        <span class="pill">Demand Modeling</span>
-                        <span class="pill">Causal Modeling</span>
-                        <span class="pill">Multivariate Analysis</span>
-                        <span class="pill">Scanner Data</span>
-                        <span class="pill">CPG Analytics</span>
-                      </div>
+                      <p class="tech-list">Python, SAS, Pricing Strategy, Promotion Optimization, Demand Modeling, Causal Modeling, Multivariate Analysis, Scanner Data, CPG Analytics</p>
                     </div>
                   </div>
                 </article>
@@ -1872,25 +1462,22 @@
             </div>
           </div>
 
-          <!-- Company: Creative Galileo -->
-          <div class="company reveal" data-delay="2">
+          <!-- Company 3: Creative Galileo -->
+          <div class="company reveal">
             <h3 class="company-heading">
               <button class="company-toggle" type="button" aria-expanded="false" aria-controls="company-creative-galileo-panel">
+                <span class="company-number">03</span>
                 <span class="company-headline">
                   <span class="company-name-text">Creative Galileo</span>
                   <span class="company-meta">1 Role · Apr 2023 – Jul 2023</span>
                 </span>
-                <span class="chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 6 15 12 9 18" />
-                  </svg>
-                </span>
+                <span class="company-indicator" aria-hidden="true"></span>
               </button>
             </h3>
             <div class="company-content" id="company-creative-galileo-panel">
               <div class="company-content-inner">
 
-                <!-- Role: Data Science Intern (Creative Galileo) -->
+                <!-- Role 5: Data Science Intern (Creative Galileo) -->
                 <article class="role-node">
                   <h4 class="role-heading">
                     <button class="role-toggle" type="button" aria-expanded="false" aria-controls="role-galileo-intern-panel">
@@ -1901,26 +1488,22 @@
                         </span>
                         <span class="role-summary-text">Built ML and telemetry systems to drive user retention and platform performance for a Series-A Ed-Tech startup with 10M+ app downloads.</span>
                       </span>
-                      <span class="chevron" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="9 6 15 12 9 18" />
-                        </svg>
-                      </span>
+                      <span class="role-indicator" aria-hidden="true"></span>
                     </button>
                   </h4>
                   <div class="role-content" id="role-galileo-intern-panel">
                     <div class="role-content-inner">
-                      <div class="metrics">
-                        <div class="metric">
-                          <div class="metric-value" data-value="10M+">0M+</div>
+                      <div class="role-metrics">
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="10M+">10M+</div>
                           <div class="metric-caption">App downloads at the Series-A Ed-Tech platform</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value accent" data-value="10%">0%</div>
+                        <div class="role-metric">
+                          <div class="metric-value accent" data-value="10%">10%</div>
                           <div class="metric-caption">Reduction in app load times from targeted performance optimizations</div>
                         </div>
-                        <div class="metric">
-                          <div class="metric-value" data-value="12%">0%</div>
+                        <div class="role-metric">
+                          <div class="metric-value" data-value="12%">12%</div>
                           <div class="metric-caption">Reduction in payment-page churn from funnel bottleneck fixes</div>
                         </div>
                       </div>
@@ -1931,9 +1514,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-galileo-1">
                               <span class="bullet-number">01</span>
                               <span class="bullet-summary-text">Built churn-prediction models on user behavioral data for a Series-A Ed-Tech with 10M+ app downloads, generating risk scores to drive retention initiatives.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-galileo-1">
@@ -1947,9 +1528,7 @@
                             <button class="bullet-toggle" type="button" aria-expanded="false" aria-controls="bullet-galileo-2">
                               <span class="bullet-number">02</span>
                               <span class="bullet-summary-text">Diagnosed user telemetry on AWS S3 to surface latency bottlenecks, cutting app load times 10% and payment-page churn 12%.</span>
-                              <span class="chevron" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18" /></svg>
-                              </span>
+                              <span class="bullet-indicator" aria-hidden="true"></span>
                             </button>
                           </h5>
                           <div class="bullet-content" id="bullet-galileo-2">
@@ -1960,17 +1539,7 @@
                         </li>
                       </ul>
 
-                      <div class="tech-pills">
-                        <span class="pill">Python</span>
-                        <span class="pill">scikit-learn</span>
-                        <span class="pill">AWS SageMaker</span>
-                        <span class="pill">AWS S3</span>
-                        <span class="pill">Churn Modeling</span>
-                        <span class="pill">Telemetry Analysis</span>
-                        <span class="pill">Funnel Optimization</span>
-                        <span class="pill">Behavioral Analytics</span>
-                        <span class="pill">Ed-Tech</span>
-                      </div>
+                      <p class="tech-list">Python, scikit-learn, AWS SageMaker, AWS S3, Churn Modeling, Telemetry Analysis, Funnel Optimization, Behavioral Analytics, Ed-Tech</p>
                     </div>
                   </div>
                 </article>
@@ -1983,43 +1552,33 @@
       </div>
     </section>
 
-    <!-- =================== CAPABILITIES =================== -->
+    <!-- =================== SKILLS / CAPABILITIES =================== -->
     <section id="skills" aria-labelledby="skills-heading">
       <div class="container">
         <header class="section-header">
+          <span class="section-rule" aria-hidden="true"></span>
           <p class="eyebrow reveal">02 – Capabilities</p>
-          <h2 class="section-title reveal" data-delay="1" id="skills-heading">
+          <h2 class="section-title reveal" id="skills-heading">
             A stack built for <em>production</em>, not slide decks.
           </h2>
         </header>
 
-        <div class="capabilities-grid">
-          <div class="reveal tilt-card">
+        <div class="capabilities-stack">
+          <div class="capability-block reveal">
             <h3 class="capability-title">Languages &amp; Libraries</h3>
-            <p class="capability-list">
-              Python<span class="dot">·</span>&#8203;PyTorch<span class="dot">·</span>&#8203;TensorFlow<span class="dot">·</span>&#8203;Scikit&#8209;learn<span class="dot">·</span>&#8203;Pandas<span class="dot">·</span>&#8203;NumPy<span class="dot">·</span>&#8203;PySpark<span class="dot">·</span>&#8203;Keras<span class="dot">·</span>&#8203;Matplotlib<span class="dot">·</span>&#8203;Plotly<span class="dot">·</span>&#8203;R<span class="dot">·</span>&#8203;SAS
-            </p>
+            <p class="capability-list">Python<span class="dot">·</span>&#8203;PyTorch<span class="dot">·</span>&#8203;TensorFlow<span class="dot">·</span>&#8203;Scikit&#8209;learn<span class="dot">·</span>&#8203;Pandas<span class="dot">·</span>&#8203;NumPy<span class="dot">·</span>&#8203;PySpark<span class="dot">·</span>&#8203;Keras<span class="dot">·</span>&#8203;Matplotlib<span class="dot">·</span>&#8203;Plotly<span class="dot">·</span>&#8203;R<span class="dot">·</span>&#8203;SAS</p>
           </div>
-
-          <div class="reveal tilt-card" data-delay="1">
+          <div class="capability-block reveal">
             <h3 class="capability-title">Tools</h3>
-            <p class="capability-list">
-              Tableau<span class="dot">·</span>&#8203;PowerBI<span class="dot">·</span>&#8203;Alteryx<span class="dot">·</span>&#8203;Databricks<span class="dot">·</span>&#8203;Mixpanel<span class="dot">·</span>&#8203;Microsoft&nbsp;Excel<span class="dot">·</span>&#8203;Power&nbsp;Automate<span class="dot">·</span>&#8203;Git<span class="dot">·</span>&#8203;GitHub&nbsp;Actions<span class="dot">·</span>&#8203;Cursor<span class="dot">·</span>&#8203;Claude&nbsp;Code
-            </p>
+            <p class="capability-list">Tableau<span class="dot">·</span>&#8203;PowerBI<span class="dot">·</span>&#8203;Alteryx<span class="dot">·</span>&#8203;Databricks<span class="dot">·</span>&#8203;Mixpanel<span class="dot">·</span>&#8203;Microsoft&nbsp;Excel<span class="dot">·</span>&#8203;Power&nbsp;Automate<span class="dot">·</span>&#8203;Git<span class="dot">·</span>&#8203;GitHub&nbsp;Actions<span class="dot">·</span>&#8203;Cursor<span class="dot">·</span>&#8203;Claude&nbsp;Code</p>
           </div>
-
-          <div class="reveal tilt-card" data-delay="2">
+          <div class="capability-block reveal">
             <h3 class="capability-title">Database Technologies</h3>
-            <p class="capability-list">
-              MySQL<span class="dot">·</span>&#8203;PostgreSQL<span class="dot">·</span>&#8203;MS&nbsp;SQL&nbsp;Server<span class="dot">·</span>&#8203;MongoDB<span class="dot">·</span>&#8203;Oracle<span class="dot">·</span>&#8203;Apache&nbsp;Hadoop<span class="dot">·</span>&#8203;Snowflake
-            </p>
+            <p class="capability-list">MySQL<span class="dot">·</span>&#8203;PostgreSQL<span class="dot">·</span>&#8203;MS&nbsp;SQL&nbsp;Server<span class="dot">·</span>&#8203;MongoDB<span class="dot">·</span>&#8203;Oracle<span class="dot">·</span>&#8203;Apache&nbsp;Hadoop<span class="dot">·</span>&#8203;Snowflake</p>
           </div>
-
-          <div class="reveal tilt-card" data-delay="3">
+          <div class="capability-block reveal">
             <h3 class="capability-title">Cloud Platforms</h3>
-            <p class="capability-list">
-              AWS<span class="dot">·</span>&#8203;S3<span class="dot">·</span>&#8203;Redshift<span class="dot">·</span>&#8203;QuickSight<span class="dot">·</span>&#8203;Athena<span class="dot">·</span>&#8203;Glue<span class="dot">·</span>&#8203;Azure<span class="dot">·</span>&#8203;Azure&nbsp;Kubernetes<span class="dot">·</span>&#8203;Azure&nbsp;Blob&nbsp;Storage
-            </p>
+            <p class="capability-list">AWS<span class="dot">·</span>&#8203;S3<span class="dot">·</span>&#8203;Redshift<span class="dot">·</span>&#8203;QuickSight<span class="dot">·</span>&#8203;Athena<span class="dot">·</span>&#8203;Glue<span class="dot">·</span>&#8203;Azure<span class="dot">·</span>&#8203;Azure&nbsp;Kubernetes<span class="dot">·</span>&#8203;Azure&nbsp;Blob&nbsp;Storage</p>
           </div>
         </div>
       </div>
@@ -2029,8 +1588,9 @@
     <section id="about" aria-labelledby="about-heading">
       <div class="container">
         <header class="section-header">
+          <span class="section-rule" aria-hidden="true"></span>
           <p class="eyebrow reveal">03 – About</p>
-          <h2 class="section-title reveal" data-delay="1" id="about-heading">
+          <h2 class="section-title reveal" id="about-heading">
             From numbers in Pune to AI in <em>San Francisco</em>.
           </h2>
         </header>
@@ -2040,15 +1600,15 @@
             It started with numbers. I was the kid who chased harder problems for fun and never quite stopped. That pull took me through Pune University with honors in AI and machine learning, then to Creative Galileo for my first real-world ML on a 10M+ download Ed-Tech platform. From there I crossed the Pacific to UT Dallas for a master's in Business Analytics and AI. I joined Onpoint Insights as an intern and never left, working with clients across retail, pharma, and healthcare, and now building a government-compliant medical coding pipeline as their sole AI Engineer. Every client taught me what AI looks like when it actually has to work. Now I'm in San Francisco, doing what every step prepared me for: <em>finding where companies are leaving growth on the table, and rebuilding their systems with AI that multiplies it.</em>
           </p>
 
-          <ul class="education-list reveal" data-delay="1">
-            <li class="education-entry">
+          <ul class="education-list">
+            <li class="education-entry reveal">
               <div class="education-row">
                 <span class="education-school">The University of Texas at Dallas</span>
                 <span class="education-date">May 2025</span>
               </div>
               <div class="education-degree">M.S., Business Analytics &amp; Artificial Intelligence</div>
             </li>
-            <li class="education-entry">
+            <li class="education-entry reveal">
               <div class="education-row">
                 <span class="education-school">Pune University</span>
                 <span class="education-date">May 2023</span>
@@ -2064,15 +1624,18 @@
   <!-- =================== CONTACT / FOOTER =================== -->
   <footer class="contact" id="contact" aria-labelledby="contact-heading">
     <div class="container">
-      <p class="eyebrow reveal" style="margin-bottom: clamp(32px, 5vw, 56px);">04 – Contact</p>
-      <h2 class="contact-headline reveal curtain" data-delay="1" id="contact-heading">
-        Let's build something that creates an impact.
-      </h2>
+      <header class="section-header">
+        <span class="section-rule" aria-hidden="true"></span>
+        <p class="eyebrow reveal">04 – Contact</p>
+      </header>
+      <h2 class="contact-headline" id="contact-heading"><span class="word">Let's</span> <span class="word">build</span> <span class="word">something</span> <span class="word">that</span> <span class="word">creates</span> <span class="word">an</span> <span class="word">impact.</span></h2>
 
       <div class="contact-links">
-        <a class="contact-link reveal" href="mailto:ritinwadekar6@gmail.com">ritinwadekar6@gmail.com</a>
-        <a class="contact-link reveal" data-delay="1" href="tel:+19728225748">(972) 822-5748</a>
-        <a class="contact-link reveal" data-delay="2" href="https://www.linkedin.com/in/ritin-wadekar/" target="_blank" rel="noopener">linkedin.com/in/ritin-wadekar</a>
+        <a class="contact-link reveal" href="mailto:ritinwadekar6@gmail.com">
+          <span class="link-arrow" aria-hidden="true">↗</span>ritinwadekar6@gmail.com
+        </a>
+        <a class="contact-link reveal" href="tel:+19728225748">(972) 822-5748</a>
+        <a class="contact-link reveal" href="https://www.linkedin.com/in/ritin-wadekar/" target="_blank" rel="noopener">linkedin.com/in/ritin-wadekar</a>
       </div>
 
       <div class="footer-meta">
@@ -2082,1018 +1645,525 @@
     </div>
   </footer>
 
-  <!-- Lenis smooth scroll -->
+  <!-- CDN deps for M4 motion: Lenis smooth scroll + GSAP + ScrollTrigger -->
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-  <!-- GSAP + ScrollTrigger + SplitType (motion engine) -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/split-type@0.3.4/umd/index.js"></script>
 
-  <script>
-    (function () {
-      'use strict';
+  <script type="module">
+    /* =====================================================
+     * Milestones C + D — accordion, menu, nav, motion layer.
+     * Lenis smooth scroll, GSAP reveals, hero WONK settle,
+     * section-rule + about-em underline draw-in, contact
+     * word-stagger fade, metric count-up. Reduced-motion gated.
+     * OGL hero arrives in M5.
+     * ===================================================== */
 
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const finePointer    = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      const isMobile       = window.matchMedia('(max-width: 1024px)').matches;
-      const hasGSAP        = typeof gsap !== 'undefined';
-      const hasST          = hasGSAP && typeof ScrollTrigger !== 'undefined';
-      const hasSplit       = typeof SplitType !== 'undefined';
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasGSAP  = typeof window.gsap !== 'undefined';
+    const hasST    = hasGSAP && typeof window.ScrollTrigger !== 'undefined';
+    const hasLenis = typeof window.Lenis !== 'undefined';
 
-      /* ============ Hero load ============ */
-      requestAnimationFrame(function () {
-        document.getElementById('hero').classList.add('is-loaded');
+    /* ---- Mobile menu ---- */
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function setMenu(open) {
+      mobileMenu.classList.toggle('is-open', open);
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+      if (open) mobileMenu.removeAttribute('inert');
+      else      mobileMenu.setAttribute('inert', '');
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.textContent = open ? 'close' : 'menu';
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    menuToggle.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('is-open')));
+    mobileMenu.querySelectorAll('[data-close-menu]').forEach((el) => {
+      el.addEventListener('click', () => {
+        setMenu(false);
+        try { menuToggle.focus(); } catch (e) {}
       });
+    });
 
-      const root = document.documentElement;
+    /* ---- Nav scroll behavior ---- */
+    const nav = document.getElementById('nav');
+    let lastY = window.scrollY;
+    let navTicking = false;
+    function onNavScroll() {
+      const y = window.scrollY;
+      if (y > 80) nav.classList.add('is-scrolled');
+      else        nav.classList.remove('is-scrolled');
+      const dy = y - lastY;
+      if (y > 200 && dy > 8) nav.classList.add('is-hidden');
+      else if (dy < -4 || y < 100) nav.classList.remove('is-hidden');
+      lastY = y;
+      navTicking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!navTicking) { requestAnimationFrame(onNavScroll); navTicking = true; }
+    }, { passive: true });
 
-      /* ============ Mobile menu ============ */
-      const menuToggle = document.getElementById('menu-toggle');
-      const mobileMenu = document.getElementById('mobile-menu');
-      function setMenu(open) {
-        mobileMenu.classList.toggle('is-open', open);
-        mobileMenu.setAttribute('aria-hidden', String(!open));
-        if (open) mobileMenu.removeAttribute('inert');
-        else      mobileMenu.setAttribute('inert', '');
-        menuToggle.setAttribute('aria-expanded', String(open));
-        menuToggle.textContent = open ? 'close' : 'menu';
-        document.body.style.overflow = open ? 'hidden' : '';
-      }
-      menuToggle.addEventListener('click', function () {
-        setMenu(!mobileMenu.classList.contains('is-open'));
-      });
-      mobileMenu.querySelectorAll('[data-close-menu]').forEach(function (el) {
-        el.addEventListener('click', function () {
-          setMenu(false);
-          // E14: return focus to the trigger
-          try { menuToggle.focus(); } catch (e) {}
-        });
-      });
-
-      /* ============ Nav scroll behavior ============ */
-      const nav = document.getElementById('nav');
-      let lastY = window.scrollY;
-      let navTicking = false;
-      function onNavScroll() {
-        const y = window.scrollY;
-        if (y > 80) nav.classList.add('is-scrolled');
-        else nav.classList.remove('is-scrolled');
-
-        const dy = y - lastY;
-        if (y > 200 && dy > 8) nav.classList.add('is-hidden');
-        else if (dy < -4 || y < 100) nav.classList.remove('is-hidden');
-
-        lastY = y;
-        navTicking = false;
-      }
-      window.addEventListener('scroll', function () {
-        if (!navTicking) {
-          requestAnimationFrame(onNavScroll);
-          navTicking = true;
-        }
-      }, { passive: true });
-
-      /* ============ Lenis smooth scroll ============ */
-      let lenis = null;
-      if (!prefersReduced && typeof Lenis !== 'undefined') {
-        lenis = new Lenis({
-          lerp: 0.1,
-          smoothWheel: true,
-          syncTouch: false,
-        });
-
-        if (hasST) {
-          gsap.registerPlugin(ScrollTrigger);
-          lenis.on('scroll', ScrollTrigger.update);
-          gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-          gsap.ticker.lagSmoothing(0);
-        } else {
-          (function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-          })();
-        }
-      } else if (hasST) {
-        gsap.registerPlugin(ScrollTrigger);
-      }
-
-      // Anchor smooth scrolling
-      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          const id = link.getAttribute('href');
-          if (id.length <= 1) return;
-          const target = document.querySelector(id);
-          if (!target) return;
-          e.preventDefault();
-          if (lenis) lenis.scrollTo(target, { offset: -20 });
-          else target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
-        });
-      });
-
-      /* ============ Reveal on scroll (existing) ============ */
-      const revealEls = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window && !prefersReduced) {
-        const io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              io.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
-        revealEls.forEach(function (el) { io.observe(el); });
+    /* ---- Lenis smooth scroll (driven by GSAP ticker when both present) ---- */
+    let lenis = null;
+    if (!prefersReduced && hasLenis) {
+      lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true, syncTouch: false });
+      if (hasST) {
+        window.gsap.registerPlugin(window.ScrollTrigger);
+        lenis.on('scroll', window.ScrollTrigger.update);
+        window.gsap.ticker.add((time) => lenis.raf(time * 1000));
+        window.gsap.ticker.lagSmoothing(0);
       } else {
-        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+        (function raf(time) { lenis.raf(time); requestAnimationFrame(raf); })();
       }
+    } else if (hasST) {
+      window.gsap.registerPlugin(window.ScrollTrigger);
+    }
 
-      /* ============ Metric count-up ============ */
-      function parseMetric(str) {
-        const m = str.match(/^([^\d.\-]*)(-?\d+(?:\.\d+)?)(.*)$/);
-        if (!m) return null;
-        const prefix = m[1];
-        const numStr = m[2];
-        const suffix = m[3];
-        const decimals = numStr.includes('.') ? numStr.split('.')[1].length : 0;
-        return { prefix: prefix, target: parseFloat(numStr), suffix: suffix, decimals: decimals };
-      }
-      function fmt(prefix, val, suffix, decimals) {
-        const num = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toString();
-        return prefix + num + suffix;
-      }
-      function animateMetric(el) {
-        const original = el.getAttribute('data-value') || el.textContent.trim();
-        const parsed = parseMetric(original);
-        if (!parsed) { el.textContent = original; return; }
-        if (prefersReduced) { el.textContent = original; return; }
+    /* ---- Anchor smooth scrolling (Lenis if available, native otherwise) ---- */
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        if (id.length <= 1) return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) lenis.scrollTo(target, { offset: -20 });
+        else target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
 
-        const duration = 1400;
-        const start = performance.now();
-        function tick(now) {
-          const t = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - t, 3);
-          const val = parsed.target * eased;
-          el.textContent = fmt(parsed.prefix, val, parsed.suffix, parsed.decimals);
-          if (t < 1) requestAnimationFrame(tick);
-          else el.textContent = original;
-        }
-        requestAnimationFrame(tick);
+    /* ---- Metric count-up ---- */
+    function parseMetric(str) {
+      const m = String(str).match(/^([^\d.\-]*)(-?\d+(?:\.\d+)?)(.*)$/);
+      if (!m) return null;
+      return {
+        prefix:   m[1],
+        target:   parseFloat(m[2]),
+        suffix:   m[3],
+        decimals: m[2].includes('.') ? m[2].split('.')[1].length : 0
+      };
+    }
+    function fmt(prefix, val, suffix, decimals) {
+      const num = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toString();
+      return prefix + num + suffix;
+    }
+    function animateMetric(el) {
+      const original = el.getAttribute('data-value') || el.textContent.trim();
+      const parsed   = parseMetric(original);
+      if (!parsed)        { el.textContent = original; return; }
+      if (prefersReduced) { el.textContent = original; return; }
+      el.textContent = fmt(parsed.prefix, 0, parsed.suffix, parsed.decimals);
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const val = parsed.target * eased;
+        el.textContent = fmt(parsed.prefix, val, parsed.suffix, parsed.decimals);
+        if (t < 1) requestAnimationFrame(tick);
+        else el.textContent = original;
       }
-      function fireMetric(el) {
-        if (el.dataset.animated === 'true') return;
-        el.dataset.animated = 'true';
-        animateMetric(el);
+      requestAnimationFrame(tick);
+    }
+    function fireMetric(el) {
+      if (el.dataset.animated === 'true') return;
+      el.dataset.animated = 'true';
+      animateMetric(el);
+    }
+    if (prefersReduced) {
+      /* Under reduced-motion, write final values immediately; no count-up. */
+      document.querySelectorAll('.metric-value').forEach((m) => {
+        const v = m.getAttribute('data-value');
+        if (v) m.textContent = v;
+        m.dataset.animated = 'true';
+      });
+    }
+    /* Note: proof-metric strip was removed per user request. Role-metric count-up
+       is still triggered via toggleNode when a role accordion opens. */
+
+    /* ---- Accordion (3 levels) + role-metric count-up trigger ---- */
+    function toggleNode(button) {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      const next   = !isOpen;
+      button.setAttribute('aria-expanded', String(next));
+      const wrapper = button.closest('.bullet-node, .role-node, .company');
+      if (!wrapper) return;
+      wrapper.classList.toggle('is-open', next);
+      if (next && wrapper.classList.contains('role-node') && !prefersReduced) {
+        setTimeout(() => {
+          wrapper.querySelectorAll('.role-metric .metric-value').forEach(fireMetric);
+        }, 180);
       }
+      if (hasST) setTimeout(() => window.ScrollTrigger.refresh(), 440);
+    }
+    document.querySelectorAll('.company-toggle, .role-toggle, .bullet-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => toggleNode(btn));
+    });
 
-      /* ============ Tree toggle ============ */
-      function toggleNode(button) {
-        const isOpen = button.getAttribute('aria-expanded') === 'true';
-        const next = !isOpen;
-        button.setAttribute('aria-expanded', String(next));
-        const wrapper = button.closest('.bullet-node, .role-node, .company');
-        if (!wrapper) return;
-        wrapper.classList.toggle('is-open', next);
+    /* ---- Reveal IntersectionObserver ---- */
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      const revealIO = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add('is-visible');
+            revealIO.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+      document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
+    }
 
-        if (next && wrapper.classList.contains('role-node')) {
-          const delay = prefersReduced ? 0 : 180;
-          setTimeout(function () {
-            wrapper.querySelectorAll('.metric-value').forEach(fireMetric);
-            // Tech-pill cascade (F13)
-            if (hasGSAP && !prefersReduced) {
-              const pills = wrapper.querySelectorAll('.tech-pills .pill');
-              if (pills.length) {
-                gsap.fromTo(pills,
-                  { opacity: 0, scale: 0.85, y: 6 },
-                  { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.03 }
-                );
-              }
+    /* ---- Section-rule draw-in ---- */
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      const ruleIO = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add('is-drawn');
+            ruleIO.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.6, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.section-rule').forEach((r) => ruleIO.observe(r));
+    }
+
+    /* ---- About prose closing-em underline draw ---- */
+    const aboutEm = document.querySelector('.about-prose em');
+    if (aboutEm) {
+      if (!prefersReduced && 'IntersectionObserver' in window) {
+        const aboutIO = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              aboutEm.classList.add('is-drawn');
+              aboutIO.unobserve(aboutEm);
             }
-          }, delay);
+          });
+        }, { threshold: 0.5 });
+        aboutIO.observe(aboutEm);
+      }
+    }
+
+    /* ---- Hero settle: per-line opacity + WONK 1 → 0, 120ms stagger ---- */
+    const heroEl = document.querySelector('.hero');
+    if (!prefersReduced && hasGSAP && heroEl) {
+      const lines = heroEl.querySelectorAll('.hero-headline .hero-line');
+      let completed = 0;
+      lines.forEach((line, i) => {
+        line.style.setProperty('--wonk', '1');
+        const state = { wonk: 1 };
+        window.gsap.timeline({ delay: i * 0.12 })
+          .fromTo(line, { opacity: 0 }, { opacity: 1, duration: 0.9, ease: 'power3.out' }, 0)
+          .to(state, {
+            wonk: 0,
+            duration: 0.9,
+            ease: 'power3.out',
+            onUpdate: () => line.style.setProperty('--wonk', state.wonk)
+          }, 0)
+          .call(() => {
+            completed++;
+            if (completed === lines.length) heroEl.classList.add('is-settled');
+          });
+      });
+    } else if (heroEl) {
+      heroEl.classList.add('is-settled');
+    }
+
+    /* ---- Contact headline: word-stagger fade + subtle WONK pulse ---- */
+    if (!prefersReduced && hasGSAP && hasST) {
+      const headline = document.querySelector('.contact-headline');
+      const words = headline ? headline.querySelectorAll('.word') : [];
+      if (words.length) {
+        const tl = window.gsap.timeline({
+          scrollTrigger: { trigger: headline, start: 'top 80%', once: true }
+        });
+        tl.fromTo(words,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6, stagger: 0.06, ease: 'power3.out' },
+          0
+        );
+        words.forEach((w, i) => {
+          const state = { wonk: 0 };
+          tl.to(state, {
+            wonk: 0.5,
+            duration: 0.3,
+            ease: 'power2.out',
+            onUpdate: () => w.style.setProperty('--wonk', state.wonk)
+          }, i * 0.06)
+          .to(state, {
+            wonk: 0,
+            duration: 0.3,
+            ease: 'power2.in',
+            onUpdate: () => w.style.setProperty('--wonk', state.wonk)
+          }, i * 0.06 + 0.3);
+        });
+      }
+    }
+
+    /* Refresh ScrollTrigger after fonts swap so triggers align to final layout. */
+    if (hasST && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => window.ScrollTrigger.refresh());
+    }
+
+    /* =====================================================
+     * M5 — WebGL hero (OGL ESM, raymarched SDF metaballs)
+     * Fallback OR-conditions (all keep SVG visible, skip OGL):
+     *   • prefers-reduced-motion: reduce
+     *   • viewport width < 768px
+     *   • WebGL context creation failure
+     *   • OGL dynamic import failure
+     * ===================================================== */
+    (async function initWebGLHero() {
+      const heroCanvas  = document.querySelector('.hero-canvas');
+      const heroSvg     = document.querySelector('.hero-svg-fallback');
+      const heroSlot    = document.querySelector('.hero-art-slot');
+      const heroSection = document.querySelector('.hero');
+      if (!heroCanvas || !heroSvg || !heroSlot || !heroSection) return;
+
+      const isReducedMotion = prefersReduced;
+      const isNarrow        = window.matchMedia('(max-width: 768px)').matches;
+      let webglOK = false;
+      try {
+        const probe = document.createElement('canvas');
+        webglOK = !!(probe.getContext('webgl2') || probe.getContext('webgl'));
+      } catch (e) { webglOK = false; }
+      if (isReducedMotion || isNarrow || !webglOK) return; // SVG fallback stays
+
+      let OGL;
+      try {
+        OGL = await import('https://cdn.jsdelivr.net/npm/ogl@1.0.11/dist/ogl.mjs');
+      } catch (e) { return; } // SVG fallback stays
+      const { Renderer, Triangle, Program, Mesh } = OGL;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      const renderer = new Renderer({
+        canvas: heroCanvas,
+        dpr,
+        alpha: false,
+        antialias: false,
+        powerPreference: 'high-performance'
+      });
+      const gl = renderer.gl;
+      gl.clearColor(0.075, 0.063, 0.047, 1); // #13100C — match new paper
+
+      const geometry = new Triangle(gl);
+
+      /* Vertex shader: trivial fullscreen-quad pass-through.
+         `a_position` from brief renamed to `position` so OGL's Triangle attribute
+         name matches. The hand-tuned fragment shader below is paste-verbatim. */
+      const VERT = /* glsl */`
+        attribute vec2 position;
+        void main() { gl_Position = vec4(position, 0.0, 1.0); }
+      `;
+
+      /* Fragment shader: VERBATIM from brief — DO NOT MODIFY.
+         Comments inside the brief (// VERTEX, // FRAGMENT) are stripped only because
+         they are not part of the shader body; every other character is preserved. */
+      const FRAG = /* glsl */`
+        precision highp float;
+        uniform vec2  u_resolution;
+        uniform float u_time;
+        uniform vec2  u_mouse;       // normalized -1..1, y inverted to match world
+        uniform float u_mouseInfluence; // 0..1, lerps in on mouseenter, out on mouseleave
+        uniform int   u_maxSteps;    // 64 active, 16 when scrolling out
+        uniform vec3  u_paper;       // background paper color
+        uniform vec3  u_ink;         // ink color
+        uniform vec3  u_terracotta;  // accent-2
+
+        #define MAX_DIST 12.0
+        #define SURF_DIST 0.0015
+
+        float hash(vec3 p){ p=fract(p*0.3183099+vec3(0.1,0.2,0.3)); p*=17.0; return fract(p.x*p.y*p.z*(p.x+p.y+p.z)); }
+        float noise(vec3 x){
+          vec3 i=floor(x), f=fract(x);
+          f=f*f*(3.0-2.0*f);
+          return mix(mix(mix(hash(i+vec3(0,0,0)),hash(i+vec3(1,0,0)),f.x),
+                         mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
+                     mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),
+                         mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);
+        }
+        float smin(float a,float b,float k){ float h=clamp(0.5+0.5*(b-a)/k,0.0,1.0); return mix(b,a,h)-k*h*(1.0-h); }
+
+        vec3 spherePos(float i){
+          float t = u_time * 0.18;
+          float phase = i * 2.0944; // 120deg apart
+          return vec3(cos(t + phase) * 1.0, sin(t * 0.7 + phase) * 0.35, sin(t + phase) * 1.0);
         }
 
-        if (hasST) setTimeout(function () { ScrollTrigger.refresh(); }, 440);
+        float scene(vec3 p){
+          vec3 mouseTarget = vec3(u_mouse.x * 1.4, u_mouse.y * 0.9, 0.0);
+          float d = 1e5;
+          for(int i=0;i<3;i++){
+            vec3 base = spherePos(float(i));
+            vec3 c = mix(base, base * 0.4 + mouseTarget * 0.9, u_mouseInfluence);
+            float r = 0.62 + 0.08 * sin(u_time * 0.6 + float(i) * 1.7);
+            r += 0.05 * noise(p * 1.8 + float(i) * 4.2 + u_time * 0.25);
+            float sd = length(p - c) - r;
+            d = smin(d, sd, 0.55);
+          }
+          return d;
+        }
+
+        vec3 calcNormal(vec3 p){
+          vec2 e=vec2(0.001,0.0);
+          return normalize(vec3(scene(p+e.xyy)-scene(p-e.xyy),
+                                scene(p+e.yxy)-scene(p-e.yxy),
+                                scene(p+e.yyx)-scene(p-e.yyx)));
+        }
+
+        void main(){
+          vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / u_resolution.y;
+          vec3 ro = vec3(0.0, 0.0, 3.4);
+          vec3 rd = normalize(vec3(uv, -1.3));
+
+          float t = 0.0;
+          bool hit = false;
+          for(int i=0;i<128;i++){
+            if(i >= u_maxSteps) break;
+            vec3 p = ro + rd * t;
+            float d = scene(p);
+            if(d < SURF_DIST){ hit = true; break; }
+            if(t > MAX_DIST) break;
+            t += d * 0.85;
+          }
+
+          vec3 col = u_paper;
+          if(hit){
+            vec3 p = ro + rd * t;
+            vec3 n = calcNormal(p);
+            float fres = pow(1.0 - max(dot(n, -rd), 0.0), 2.2);
+            float core = smoothstep(0.0, 0.6, dot(n, normalize(vec3(0.3, 0.7, 0.5))));
+            vec3 base = mix(u_terracotta, u_ink, fres);
+            base = mix(base * 0.85, base, core);
+            // subtle edge darkening to keep it readable on paper bg
+            float silhouette = smoothstep(0.0, 0.02, scene(p + rd * 0.02));
+            col = mix(base, u_paper, silhouette * 0.0); // kept at 0; placeholder for future tuning
+            col = mix(u_paper, col, 1.0); // crisp edge against paper
+            // grain to match page
+            float g = (hash(vec3(gl_FragCoord.xy, u_time*0.0)) - 0.5) * 0.018;
+            col += g;
+          }
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      let slotW = heroSlot.clientWidth  || 1;
+      let slotH = heroSlot.clientHeight || 1;
+      renderer.setSize(slotW, slotH);
+
+      const program = new Program(gl, {
+        vertex: VERT,
+        fragment: FRAG,
+        uniforms: {
+          u_resolution:     { value: [slotW * dpr, slotH * dpr] },
+          u_time:           { value: 0 },
+          u_mouse:          { value: [0, 0] },
+          u_mouseInfluence: { value: 0 },
+          u_maxSteps:       { value: 64 },
+          u_paper:          { value: [0.075, 0.063, 0.047] }, // #13100C (dark bg)
+          u_ink:            { value: [0.941, 0.914, 0.847] }, // #F0E9D8 (cream — grazing edges read as a soft halo on dark)
+          u_terracotta:     { value: [0.788, 0.318, 0.165] }  // #C9512A
+        }
+      });
+      const mesh = new Mesh(gl, { geometry, program });
+
+      let raf = null;
+      let lastTime = 0;
+      let firstFrameDone = false;
+      let mouseInfluenceTarget = 0;
+      let isIntersecting = true;
+      let isTabVisible   = !document.hidden;
+
+      function render(now) {
+        if (lastTime === 0) lastTime = now;
+        const dt = (now - lastTime) / 1000;
+        lastTime = now;
+        program.uniforms.u_time.value += dt;
+
+        // Lerp mouseInfluence toward target
+        const cur = program.uniforms.u_mouseInfluence.value;
+        program.uniforms.u_mouseInfluence.value = cur + (mouseInfluenceTarget - cur) * 0.06;
+
+        // Scroll fade + step budget drop (last 30% of hero travel)
+        const heroRect = heroSection.getBoundingClientRect();
+        const vh = window.innerHeight;
+        let progress = 0;
+        if (heroRect.bottom < vh) {
+          progress = Math.max(0, Math.min(1, (vh - heroRect.bottom) / (vh * 0.3)));
+        }
+        heroCanvas.style.opacity = (1 - progress).toFixed(3);
+        program.uniforms.u_maxSteps.value = progress > 0.05 ? 16 : 64;
+
+        renderer.render({ scene: mesh });
+
+        if (!firstFrameDone) {
+          firstFrameDone = true;
+          /* Swap canvas in for SVG. Two-step: set display:block this frame,
+             add .is-loaded next frame so the opacity 0→1 transition fires. */
+          heroCanvas.style.display = 'block';
+          heroSvg.style.display = 'none';
+          requestAnimationFrame(() => {
+            heroCanvas.classList.add('is-loaded');
+          });
+        }
+        raf = requestAnimationFrame(render);
+      }
+      function start() {
+        if (raf !== null) return;
+        lastTime = 0;
+        raf = requestAnimationFrame(render);
+      }
+      function stop() {
+        if (raf === null) return;
+        cancelAnimationFrame(raf);
+        raf = null;
       }
 
-      document.querySelectorAll('.company-toggle, .role-toggle, .bullet-toggle').forEach(function (btn) {
-        btn.addEventListener('click', function () { toggleNode(btn); });
+      /* Mouse: hero-scoped (per brief — no parallax / cursor follow elsewhere). */
+      heroSection.addEventListener('mousemove', (e) => {
+        const r = heroSlot.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right
+         || e.clientY < r.top  || e.clientY > r.bottom) {
+          mouseInfluenceTarget = 0;
+          return;
+        }
+        const nx =  ((e.clientX - r.left) / r.width)  * 2 - 1;
+        const ny = -(((e.clientY - r.top)  / r.height) * 2 - 1); // y inverted
+        program.uniforms.u_mouse.value[0] = nx;
+        program.uniforms.u_mouse.value[1] = ny;
+        mouseInfluenceTarget = 1;
+      });
+      heroSection.addEventListener('mouseleave', () => { mouseInfluenceTarget = 0; });
+
+      /* IntersectionObserver pause when hero exits viewport. */
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          const en = entries[0];
+          isIntersecting = en.isIntersecting;
+          if (isIntersecting && isTabVisible) start();
+          else stop();
+        }, { threshold: 0 });
+        io.observe(heroSection);
+      }
+
+      /* visibilitychange pause when tab hidden. */
+      document.addEventListener('visibilitychange', () => {
+        isTabVisible = !document.hidden;
+        if (isTabVisible && isIntersecting) start();
+        else stop();
       });
 
-      /* =====================================================
-       * ============== v2 MOTION FEATURES ===================
-       * =====================================================*/
-
-      /* ---- F1: Scroll progress bar (PRD: disabled under reduced motion) ---- */
-      (function initScrollProgress() {
-        const bar = document.getElementById('scroll-progress');
-        if (!bar) return;
-        if (prefersReduced) { bar.style.display = 'none'; return; }
-        let ticking = false;
-        function update() {
-          const max = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-          bar.style.width = pct + '%';
-          ticking = false;
-        }
-        window.addEventListener('scroll', function () {
-          if (!ticking) { requestAnimationFrame(update); ticking = true; }
-        }, { passive: true });
-        update();
-      })();
-
-      /* ---- F2: Section rail (desktop) ---- */
-      (function initSectionRail() {
-        if (isMobile) return;
-        const sections = [
-          { id: 'work',    label: 'Work' },
-          { id: 'skills',  label: 'Skills' },
-          { id: 'about',   label: 'About' },
-          { id: 'contact', label: 'Contact' }
-        ];
-        const rail = document.createElement('aside');
-        rail.className = 'section-rail';
-        rail.setAttribute('aria-hidden', 'true');
-        sections.forEach(function (s, i) {
-          const dot = document.createElement('a');
-          dot.className = 'section-rail-dot';
-          dot.href = '#' + s.id;
-          dot.dataset.id = s.id;
-          dot.dataset.label = s.label;
-          dot.setAttribute('aria-label', 'Jump to ' + s.label);
-          rail.appendChild(dot);
-          if (i < sections.length - 1) {
-            const line = document.createElement('span');
-            line.className = 'section-rail-line';
-            line.dataset.from = sections[i].id;
-            line.dataset.to   = sections[i + 1].id;
-            rail.appendChild(line);
-          }
-        });
-        document.body.appendChild(rail);
-
-        const dots = rail.querySelectorAll('.section-rail-dot');
-        dots.forEach(function (d) {
-          d.addEventListener('click', function (e) {
-            e.preventDefault();
-            const tgt = document.getElementById(d.dataset.id);
-            if (!tgt) return;
-            if (lenis) lenis.scrollTo(tgt, { offset: -40 });
-            else tgt.scrollIntoView({ behavior: 'smooth' });
-          });
-        });
-
-        if (!('IntersectionObserver' in window)) return;
-        const io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) {
-              dots.forEach(function (d) { d.classList.toggle('is-active', d.dataset.id === en.target.id); });
-              // F22: mark eyebrow inside active section
-              document.querySelectorAll('.eyebrow.is-active').forEach(function (e) { e.classList.remove('is-active'); });
-              const sectionEyebrow = en.target.querySelector('.eyebrow');
-              if (sectionEyebrow) sectionEyebrow.classList.add('is-active');
-            }
-          });
-        }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
-        sections.forEach(function (s) {
-          const el = document.getElementById(s.id);
-          if (el) io.observe(el);
-        });
-
-        // D3: drive --rail-progress on each connector line based on scroll
-        const lines = rail.querySelectorAll('.section-rail-line');
-        let railTicking = false;
-        function updateRailLines() {
-          const vh2 = window.innerHeight / 2;
-          lines.forEach(function (line) {
-            const a = document.getElementById(line.dataset.from);
-            const b = document.getElementById(line.dataset.to);
-            if (!a || !b) return;
-            const aTop = a.getBoundingClientRect().top;
-            const bTop = b.getBoundingClientRect().top;
-            // progress goes 0 → 1 as a's top crosses vh/2, finishes when b's top crosses vh/2
-            const span = aTop - bTop;
-            const p = span > 0 ? Math.max(0, Math.min(1, (vh2 - bTop) / span)) : (bTop < vh2 ? 1 : 0);
-            line.style.setProperty('--rail-progress', p.toFixed(3));
-          });
-          railTicking = false;
-        }
-        window.addEventListener('scroll', function () {
-          if (!railTicking) { requestAnimationFrame(updateRailLines); railTicking = true; }
-        }, { passive: true });
-        updateRailLines();
-      })();
-
-      /* ---- F3: Custom cursor (desktop, fine pointer) ---- */
-      (function initCustomCursor() {
-        if (prefersReduced || !finePointer || isMobile) return;
-        const dot = document.createElement('div');
-        dot.className = 'cursor-dot';
-        dot.setAttribute('aria-hidden', 'true');
-        const ring = document.createElement('div');
-        ring.className = 'cursor-ring';
-        ring.setAttribute('aria-hidden', 'true');
-        document.body.appendChild(dot);
-        document.body.appendChild(ring);
-
-        let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-        let rx = mx, ry = my;
-        let armed = false;
-
-        window.addEventListener('mousemove', function (e) {
-          mx = e.clientX; my = e.clientY;
-          dot.style.transform = 'translate(-50%,-50%) translate(' + mx + 'px,' + my + 'px)';
-          if (!armed) {
-            armed = true;
-            // Only hide native cursor once our custom cursor is positioned and visible
-            root.classList.add('has-custom-cursor');
-          }
-        }, { passive: true });
-
-        function loop() {
-          rx += (mx - rx) * 0.18;
-          ry += (my - ry) * 0.18;
-          ring.style.transform = 'translate(-50%,-50%) translate(' + rx + 'px,' + ry + 'px)';
-          requestAnimationFrame(loop);
-        }
-        requestAnimationFrame(loop);
-
-        const hoverables = 'a, button, .pill, .company-toggle, .role-toggle, .bullet-toggle';
-        document.querySelectorAll(hoverables).forEach(function (t) {
-          t.addEventListener('mouseenter', function () { root.classList.add('cursor-hover'); });
-          t.addEventListener('mouseleave', function () { root.classList.remove('cursor-hover'); });
-        });
-
-        // E6: use window-level mouseleave/enter for reliable cross-browser behavior
-        window.addEventListener('blur', function () {
-          dot.style.opacity = 0; ring.style.opacity = 0;
-        });
-        window.addEventListener('focus', function () {
-          dot.style.opacity = 1; ring.style.opacity = 1;
-        });
-        document.documentElement.addEventListener('mouseleave', function () {
-          dot.style.opacity = 0; ring.style.opacity = 0;
-        });
-        document.documentElement.addEventListener('mouseenter', function () {
-          dot.style.opacity = 1; ring.style.opacity = 1;
-        });
-      })();
-
-      /* ---- F5 (background gradient drift): not implemented in v2.
-             Initial ambient-orb prototype was dropped after profiling
-             showed scroll-scrubbed blur(80px) was the main jank source.
-             Hero already carries a static accent radial; revisit if a
-             cheaper variant is desired. ---- */
-
-      /* ---- F6: Hero mouse-parallax glow ---- */
-      (function initHeroParallax() {
-        const hero = document.getElementById('hero');
-        if (!hero || prefersReduced || !finePointer) return;
-        hero.addEventListener('mousemove', function (e) {
-          const r = hero.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width  - 0.5;
-          const y = (e.clientY - r.top)  / r.height - 0.5;
-          hero.style.setProperty('--hero-glow-x', (x * 50) + 'px');
-          hero.style.setProperty('--hero-glow-y', (y * 50) + 'px');
-        });
-        hero.addEventListener('mouseleave', function () {
-          hero.style.setProperty('--hero-glow-x', '0px');
-          hero.style.setProperty('--hero-glow-y', '0px');
-        });
-      })();
-
-      /* ---- F6b: Site-wide background network visualization (Canvas 2D) ---- */
-      (function initBgNetwork() {
-        const canvas = document.querySelector('.bg-network');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        const NODE_COUNT     = isMobile ? 32 : 64;
-        const MAX_EDGES      = isMobile ? 54 : 110;
-        const DIST_RATIO     = 0.18;
-        const FRAME_INTERVAL = 1000 / 30; // 30fps cap
-
-        let w = 0, h = 0;
-        let dpr = Math.min(window.devicePixelRatio || 1, 2);
-        let nodes = [];
-        let edges = [];
-        let mouseX = -1e4, mouseY = -1e4;
-        let running = false;
-        let lastFrame = 0;
-        let rewireT = 0;
-        let accent = '#E8B04B';
-        let fg = '#FAFAF7';
-
-        function readColors() {
-          const cs = getComputedStyle(document.documentElement);
-          accent = (cs.getPropertyValue('--accent') || '').trim() || accent;
-          fg     = (cs.getPropertyValue('--fg')     || '').trim() || fg;
-        }
-
-        function resize() {
-          w = Math.max(1, window.innerWidth);
-          h = Math.max(1, window.innerHeight);
-          canvas.width  = Math.floor(w * dpr);
-          canvas.height = Math.floor(h * dpr);
-          canvas.style.width  = w + 'px';
-          canvas.style.height = h + 'px';
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        function initNodes() {
-          nodes = [];
-          for (let i = 0; i < NODE_COUNT; i++) {
-            nodes.push({
-              x: Math.random() * w,
-              y: Math.random() * h,
-              vx: (Math.random() - 0.5) * 0.08,
-              vy: (Math.random() - 0.5) * 0.08,
-              r: 1.1 + Math.random() * 0.9
-            });
-          }
-        }
-
-        function buildEdges() {
-          edges = [];
-          const dmax = Math.min(w, h) * DIST_RATIO;
-          const dmax2 = dmax * dmax;
-          const cands = [];
-          for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-              const dx = nodes[i].x - nodes[j].x;
-              const dy = nodes[i].y - nodes[j].y;
-              const d2 = dx * dx + dy * dy;
-              if (d2 < dmax2) cands.push({ a: i, b: j, d2: d2 });
-            }
-          }
-          cands.sort(function (a, b) { return a.d2 - b.d2; });
-          const take = Math.min(MAX_EDGES, cands.length);
-          for (let k = 0; k < take; k++) {
-            edges.push({
-              a: cands[k].a,
-              b: cands[k].b,
-              alpha: 0,
-              targetAlpha: 0.45 + Math.random() * 0.5,
-              life: 1
-            });
-          }
-        }
-
-        function rewire() {
-          if (edges.length < 4) return;
-          const drop = Math.max(2, Math.floor(edges.length * 0.06));
-          // Weakest by targetAlpha go first
-          edges.sort(function (a, b) { return a.targetAlpha - b.targetAlpha; });
-          for (let i = 0; i < drop; i++) {
-            edges[i].targetAlpha = 0;
-            edges[i].life = -1;
-          }
-          // Try to add roughly drop-many new candidates
-          const dmax = Math.min(w, h) * DIST_RATIO * 1.15;
-          const dmax2 = dmax * dmax;
-          const used = new Set(edges.map(function (e) { return e.a + ',' + e.b; }));
-          let added = 0;
-          let tries = 0;
-          while (added < drop && tries < 60) {
-            tries++;
-            const a = Math.floor(Math.random() * nodes.length);
-            const b = Math.floor(Math.random() * nodes.length);
-            if (a === b) continue;
-            const i = Math.min(a, b), j = Math.max(a, b);
-            const key = i + ',' + j;
-            if (used.has(key)) continue;
-            const dx = nodes[i].x - nodes[j].x;
-            const dy = nodes[i].y - nodes[j].y;
-            if (dx * dx + dy * dy > dmax2) continue;
-            edges.push({ a: i, b: j, alpha: 0, targetAlpha: 0.35 + Math.random() * 0.55, life: 1 });
-            used.add(key);
-            added++;
-          }
-        }
-
-        function step() {
-          for (let i = 0; i < nodes.length; i++) {
-            const n = nodes[i];
-            if (mouseX > 0) {
-              const dx = mouseX - n.x;
-              const dy = mouseY - n.y;
-              const d2 = dx * dx + dy * dy;
-              if (d2 < 40000 && d2 > 1) {
-                n.vx += dx * 0.000035;
-                n.vy += dy * 0.000035;
-              }
-            }
-            n.vx *= 0.985;
-            n.vy *= 0.985;
-            n.vx += (Math.random() - 0.5) * 0.012;
-            n.vy += (Math.random() - 0.5) * 0.012;
-            const sp = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
-            const cap = 0.45;
-            if (sp > cap) { n.vx = (n.vx / sp) * cap; n.vy = (n.vy / sp) * cap; }
-            n.x += n.vx;
-            n.y += n.vy;
-            if (n.x < -12) n.x = w + 12;
-            else if (n.x > w + 12) n.x = -12;
-            if (n.y < -12) n.y = h + 12;
-            else if (n.y > h + 12) n.y = -12;
-          }
-          for (let i = edges.length - 1; i >= 0; i--) {
-            const e = edges[i];
-            e.alpha += (e.targetAlpha - e.alpha) * 0.05;
-            if (e.life < 0 && e.alpha < 0.01) edges.splice(i, 1);
-          }
-        }
-
-        function draw() {
-          ctx.clearRect(0, 0, w, h);
-          const dmax = Math.min(w, h) * DIST_RATIO;
-          ctx.lineWidth = 1;
-          ctx.strokeStyle = accent;
-          for (let i = 0; i < edges.length; i++) {
-            const e = edges[i];
-            const a = nodes[e.a], b = nodes[e.b];
-            if (!a || !b) continue;
-            const dx = a.x - b.x, dy = a.y - b.y;
-            const d = Math.sqrt(dx * dx + dy * dy);
-            const distFactor = Math.max(0, 1 - d / dmax);
-            const alpha = e.alpha * distFactor * 0.22;
-            if (alpha < 0.005) continue;
-            ctx.globalAlpha = alpha;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-          ctx.fillStyle = fg;
-          ctx.globalAlpha = 0.28;
-          for (let i = 0; i < nodes.length; i++) {
-            const n = nodes[i];
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          ctx.globalAlpha = 1;
-        }
-
-        function loop(ts) {
-          if (!running) return;
-          if (ts - lastFrame >= FRAME_INTERVAL) {
-            step();
-            draw();
-            rewireT += ts - lastFrame;
-            lastFrame = ts;
-            if (rewireT >= 2600) { rewire(); rewireT = 0; }
-          }
-          requestAnimationFrame(loop);
-        }
-
-        function start() {
-          if (running || prefersReduced) return;
-          running = true;
-          lastFrame = performance.now();
-          requestAnimationFrame(loop);
-        }
-        function stop() { running = false; }
-
-        function settleStatic() {
-          // Settle edge alphas to target for a single static frame
-          for (let i = 0; i < edges.length; i++) edges[i].alpha = edges[i].targetAlpha;
-          draw();
-        }
-
-        // Init
-        readColors();
-        resize();
-        initNodes();
-        buildEdges();
-        settleStatic();
-
-        // Always-on (canvas is fixed, always visible). Pause only when tab is hidden.
-        start();
-        document.addEventListener('visibilitychange', function () {
-          if (document.hidden) stop();
-          else start();
-        });
-
-        // Resize (debounced)
-        let resizeTimer;
-        window.addEventListener('resize', function () {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(function () {
-            resize();
-            buildEdges();
-            if (prefersReduced) settleStatic();
-          }, 180);
-        });
-
-        // Mouse interaction across the viewport (passive)
-        if (!isMobile && finePointer) {
-          window.addEventListener('mousemove', function (e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-          }, { passive: true });
-          document.documentElement.addEventListener('mouseleave', function () {
-            mouseX = -1e4; mouseY = -1e4;
-          });
-        }
-
-      })();
-
-      /* ---- F7: Hero headline scroll-fade ---- */
-      (function initHeroFade() {
-        if (!hasST || prefersReduced) return;
-        const hero = document.getElementById('hero');
-        if (!hero) return;
-        gsap.to('.hero-headline, .hero-supporting, .hero-eyebrow', {
-          y: -40, opacity: 0, scale: 0.96, ease: 'none',
-          scrollTrigger: { trigger: hero, start: 'bottom bottom', end: 'bottom 30%', scrub: true }
-        });
-      })();
-
-      /* ---- F8: Scroll cue fades out after first scroll ---- */
-      (function initScrollCueFade() {
-        const cue = document.querySelector('.scroll-cue');
-        if (!cue) return;
-        let faded = false;
-        function fade() {
-          if (faded) return;
-          if (window.scrollY > 80) {
-            faded = true;
-            cue.style.transition = 'opacity 500ms var(--ease)';
-            cue.style.opacity = '0';
-            window.removeEventListener('scroll', fade);
-          }
-        }
-        window.addEventListener('scroll', fade, { passive: true });
-      })();
-
-      /* ---- F9: Sticky section eyebrow (CSS-only, but ensure no conflicts) ---- */
-      // CSS handles this via position: sticky declared inline below for safety
-      (function injectStickyEyebrow() {
-        if (isMobile || prefersReduced) return;
-        const style = document.createElement('style');
-        style.textContent =
-          'main > section .section-header .eyebrow { position: sticky; top: 96px; align-self: start; z-index: 5; background: transparent; }';
-        document.head.appendChild(style);
-      })();
-
-      /* ---- F10: Company row entrance ---- */
-      (function initCompanyMotion() {
-        if (!hasST || prefersReduced) return;
-        document.querySelectorAll('.company').forEach(function (c) {
-          const toggle = c.querySelector('.company-toggle');
-          if (!toggle) return;
-          gsap.fromTo(toggle,
-            { y: 24, opacity: 0 },
-            {
-              y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
-              scrollTrigger: { trigger: c, start: 'top 85%', once: true }
-            }
-          );
-        });
-      })();
-
-      /* ---- F10b: Work section visual spine (desktop only) ---- */
-      (function initWorkSpine() {
-        if (isMobile) return;
-        const section = document.getElementById('work');
-        if (!section) return;
-        const spine = section.querySelector('.work-spine');
-        if (!spine) return;
-
-        const companies = Array.from(section.querySelectorAll('.company'));
-        if (!companies.length) return;
-
-        const nodeEls = companies.map(function () {
-          const n = document.createElement('span');
-          n.className = 'work-spine-node';
-          spine.appendChild(n);
-          return n;
-        });
-
-        function positionNodes() {
-          const spineRect = spine.getBoundingClientRect();
-          companies.forEach(function (c, i) {
-            const toggle = c.querySelector('.company-toggle');
-            if (!toggle) return;
-            const r = toggle.getBoundingClientRect();
-            const top = (r.top + r.height / 2) - spineRect.top;
-            nodeEls[i].style.top = top + 'px';
-          });
-        }
-
-        positionNodes();
-
-        if (hasST && !prefersReduced) {
-          ScrollTrigger.create({
-            trigger: section,
-            start: 'top 55%',
-            end: 'bottom 55%',
-            scrub: 0.4,
-            onUpdate: function (self) {
-              spine.style.setProperty('--spine-progress', self.progress.toFixed(3));
-            }
-          });
-        } else if (prefersReduced) {
-          spine.style.setProperty('--spine-progress', '1');
-        } else {
-          spine.style.setProperty('--spine-progress', '1');
-        }
-
-        if ('IntersectionObserver' in window) {
-          const io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (en) {
-              const idx = companies.indexOf(en.target);
-              if (idx >= 0) nodeEls[idx].classList.toggle('is-active', en.isIntersecting);
-            });
-          }, { threshold: 0, rootMargin: '-35% 0px -50% 0px' });
-          companies.forEach(function (c) { io.observe(c); });
-        }
-
-        let rTimer;
-        function debouncedReposition() {
-          clearTimeout(rTimer);
-          rTimer = setTimeout(positionNodes, 80);
-        }
-        window.addEventListener('resize', debouncedReposition);
-
-        // Reposition when accordions expand/collapse
-        const mo = new MutationObserver(debouncedReposition);
-        section.querySelectorAll('.company-toggle, .role-toggle, .bullet-toggle').forEach(function (b) {
-          mo.observe(b, { attributes: true, attributeFilter: ['aria-expanded'] });
-        });
-
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(function () { setTimeout(positionNodes, 120); });
-        }
-        if (hasST) {
-          ScrollTrigger.addEventListener('refresh', positionNodes);
-        }
-      })();
-
-      /* ---- F11: Role title character reveal (waits on font load) ---- */
-      function runRoleCharReveal() {
-        if (!hasGSAP || !hasSplit || prefersReduced) return;
-        const titles = document.querySelectorAll('.role-title-text');
-        titles.forEach(function (t) {
-          const split = new SplitType(t, { types: 'chars', tagName: 'span' });
-          t.classList.add('reveal-char');
-          split.chars.forEach(function (c) { c.classList.add('char'); });
-          if (hasST) {
-            gsap.fromTo(split.chars,
-              { opacity: 0, y: '0.4em' },
-              {
-                opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', stagger: 0.012,
-                scrollTrigger: { trigger: t, start: 'top 90%', once: true }
-              }
-            );
-          }
-        });
-      }
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(runRoleCharReveal);
-      else runRoleCharReveal();
-
-      /* ---- F12: Scroll-triggered metric count-up ----
-         Under reduced motion, write the real value immediately so users
-         never see the "0%" / "0×" / "$0B" placeholders. */
-      (function initMetricsOnScroll() {
-        const metrics = document.querySelectorAll('.metric-value');
-        if (prefersReduced) {
-          metrics.forEach(function (m) {
-            const v = m.getAttribute('data-value');
-            if (v) m.textContent = v;
-            m.dataset.animated = 'true';
-          });
-          return;
-        }
-        if (!('IntersectionObserver' in window)) {
-          metrics.forEach(fireMetric);
-          return;
-        }
-        const io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) {
-              fireMetric(en.target);
-              io.unobserve(en.target);
-            }
-          });
-        }, { threshold: 0.4 });
-        metrics.forEach(function (m) { io.observe(m); });
-      })();
-
-      /* ---- F14: Pill magnetic hover (quickTo) ---- */
-      (function initPillMagnetic() {
-        if (prefersReduced || !finePointer || isMobile || !hasGSAP) return;
-        document.querySelectorAll('.pill').forEach(function (p) {
-          const tx = gsap.quickTo(p, 'x', { duration: 0.35, ease: 'power3.out' });
-          const ty = gsap.quickTo(p, 'y', { duration: 0.35, ease: 'power3.out' });
-          p.addEventListener('mousemove', function (e) {
-            const r = p.getBoundingClientRect();
-            const x = (e.clientX - r.left - r.width / 2) / r.width;
-            const y = (e.clientY - r.top - r.height / 2) / r.height;
-            tx(x * 8);
-            ty(y * 8 - 2);
-          });
-          p.addEventListener('mouseleave', function () {
-            tx(0); ty(0);
-          });
-        });
-      })();
-
-      /* ---- F15: 3D tilt on capability cards (quickTo, cheap) ---- */
-      (function initTiltCards() {
-        if (prefersReduced || !finePointer || isMobile || !hasGSAP) return;
-        document.querySelectorAll('.tilt-card').forEach(function (card) {
-          gsap.set(card, { transformPerspective: 900, transformOrigin: '50% 50%' });
-          const rY = gsap.quickTo(card, 'rotateY', { duration: 0.4, ease: 'power3.out' });
-          const rX = gsap.quickTo(card, 'rotateX', { duration: 0.4, ease: 'power3.out' });
-          card.addEventListener('mousemove', function (e) {
-            const r = card.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width  - 0.5;
-            const y = (e.clientY - r.top)  / r.height - 0.5;
-            rY(x * 6);
-            rX(-y * 6);
-          });
-          card.addEventListener('mouseleave', function () {
-            rY(0); rX(0);
-          });
-        });
-      })();
-
-      /* ---- F16: Capability list token reveal ---- */
-      (function initTokenReveals() {
-        if (prefersReduced) return;
-        const lists = document.querySelectorAll('.capability-list');
-        lists.forEach(function (list) {
-          // Wrap each text run between dots in a <span class="token">
-          const nodes = Array.from(list.childNodes);
-          nodes.forEach(function (n) {
-            if (n.nodeType === Node.TEXT_NODE) {
-              const txt = n.textContent;
-              if (!txt || !txt.trim()) return;
-              const span = document.createElement('span');
-              span.className = 'token';
-              span.textContent = txt;
-              list.replaceChild(span, n);
-            }
-          });
-          const tokens = list.querySelectorAll('.token');
-          if (hasST && tokens.length) {
-            gsap.fromTo(tokens,
-              { opacity: 0, y: 12 },
-              {
-                opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', stagger: 0.025,
-                scrollTrigger: { trigger: list, start: 'top 85%', once: true }
-              }
-            );
-          }
-        });
-      })();
-
-      /* ---- F17: About prose word reveal (waits on font load) ---- */
-      function runProseReveal() {
-        if (!hasGSAP || !hasSplit || prefersReduced) return;
-        const prose = document.querySelector('.about-prose');
-        if (!prose) return;
-        const split = new SplitType(prose, { types: 'words', tagName: 'span' });
-        split.words.forEach(function (w) { w.classList.add('word'); });
-        prose.classList.add('reveal-word');
-        if (hasST) {
-          gsap.fromTo(split.words,
-            { opacity: 0, y: 10 },
-            {
-              opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', stagger: 0.015,
-              scrollTrigger: { trigger: prose, start: 'top 85%', once: true }
-            }
-          );
-        }
-      }
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(runProseReveal);
-      else runProseReveal();
-
-      /* ---- F18: Education slide-in ---- */
-      (function initEducation() {
-        if (!hasST || prefersReduced) return;
-        const items = document.querySelectorAll('.education-entry');
-        items.forEach(function (e, i) {
-          gsap.fromTo(e,
-            { opacity: 0, x: 28 },
-            {
-              opacity: 1, x: 0, duration: 0.55, ease: 'power3.out', delay: i * 0.12,
-              scrollTrigger: { trigger: e, start: 'top 88%', once: true }
-            }
-          );
-        });
-      })();
-
-      /* ---- F20: Contact headline curtain reveal ---- */
-      (function initContactCurtain() {
-        if (prefersReduced) {
-          const h = document.querySelector('.contact-headline.curtain');
-          if (h) h.classList.add('is-open');
-          return;
-        }
-        const headline = document.querySelector('.contact-headline.curtain');
-        if (!headline) return;
-        if ('IntersectionObserver' in window) {
-          const io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (en) {
-              if (en.isIntersecting) {
-                headline.classList.add('is-open');
-                io.unobserve(headline);
-              }
-            });
-          }, { threshold: 0.3 });
-          io.observe(headline);
-        } else {
-          headline.classList.add('is-open');
-        }
-      })();
-
-      /* ---- F21: Animated section dividers ---- */
-      (function initSectionDividers() {
-        if (prefersReduced) return;
-        const sections = ['#work', '#skills', '#about', '#contact'];
-        sections.forEach(function (sel) {
-          const section = document.querySelector(sel);
-          if (!section) return;
-          const div = document.createElement('hr');
-          div.className = 'section-divider';
-          div.setAttribute('aria-hidden', 'true');
-          section.parentNode.insertBefore(div, section);
-          if ('IntersectionObserver' in window) {
-            const io = new IntersectionObserver(function (entries) {
-              entries.forEach(function (en) {
-                if (en.isIntersecting) {
-                  div.classList.add('is-drawn');
-                  io.unobserve(div);
-                }
-              });
-            }, { threshold: 0.6 });
-            io.observe(div);
-          } else {
-            div.classList.add('is-drawn');
-          }
-        });
-      })();
-
-      /* ---- F23: Headline metrics → expand + scroll to bullet ---- */
-      (function initProofMetrics() {
-        const metrics = document.querySelectorAll('.proof-metric');
-        if (!metrics.length) return;
-
-        function openChainTo(bulletEl) {
-          // Walk up: company → role → bullet, open any that aren't already open
-          const company  = bulletEl.closest('.company');
-          const roleNode = bulletEl.closest('.role-node');
-          const bullet   = bulletEl.closest('.bullet-node');
-          const targets  = [];
-          if (company  && !company.classList.contains('is-open'))  targets.push(company.querySelector('.company-toggle'));
-          if (roleNode && !roleNode.classList.contains('is-open')) targets.push(roleNode.querySelector('.role-toggle'));
-          if (bullet   && !bullet.classList.contains('is-open'))   targets.push(bullet.querySelector('.bullet-toggle'));
-          targets.forEach(function (btn) { if (btn) toggleNode(btn); });
-          return targets.length;
-        }
-
-        function scrollToBullet(bulletEl) {
-          if (lenis) {
-            lenis.scrollTo(bulletEl, { offset: -140 });
-          } else {
-            bulletEl.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
-          }
-        }
-
-        function flashArrival(bulletEl) {
-          if (prefersReduced) return;
-          bulletEl.classList.add('is-arrival');
-          setTimeout(function () { bulletEl.classList.remove('is-arrival'); }, 1400);
-        }
-
-        metrics.forEach(function (m) {
-          m.addEventListener('click', function () {
-            const id = m.getAttribute('data-target-bullet');
-            if (!id) return;
-            const targetBullet = document.getElementById(id);
-            if (!targetBullet) return;
-            const bulletNode = targetBullet.closest('.bullet-node');
-            if (!bulletNode) return;
-
-            const opened = openChainTo(bulletNode);
-            // Wait for accordion expansion to settle before scrolling
-            const delay = opened > 0 ? (prefersReduced ? 0 : 480) : 0;
-            setTimeout(function () {
-              scrollToBullet(bulletNode);
-              flashArrival(bulletNode);
-            }, delay);
-          });
-        });
-      })();
-
-      /* Final: refresh ScrollTrigger after fonts load to align triggers */
-      if (hasST && document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-      }
-      window.addEventListener('load', function () {
-        if (hasST) ScrollTrigger.refresh();
+      /* Resize: debounced 150ms → recompute slot + uniforms. */
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          slotW = heroSlot.clientWidth  || 1;
+          slotH = heroSlot.clientHeight || 1;
+          renderer.setSize(slotW, slotH);
+          program.uniforms.u_resolution.value[0] = slotW * dpr;
+          program.uniforms.u_resolution.value[1] = slotH * dpr;
+        }, 150);
       });
+
+      start();
     })();
   </script>
 </body>
