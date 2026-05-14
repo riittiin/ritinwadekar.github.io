@@ -927,14 +927,12 @@
     @media (max-width: 768px) {
       body { font-size: 16px; }
       .hero {
+        flex-direction: column;       /* stack art slot above type — was the missing piece */
         padding-top: 96px;
         align-items: stretch;
       }
       .hero > .container {
         padding-top: 0;
-        display: flex;
-        flex-direction: column;
-        gap: clamp(32px, 6vw, 56px);
       }
       .hero-art-slot {
         position: relative;
@@ -943,6 +941,7 @@
         order: -1;
       }
       .hero-content { max-width: 100%; }
+      .hero-headline { max-width: none; }  /* let the headline use full container width */
       .hero-supporting { max-width: 100%; }
       .company-toggle {
         grid-template-columns: var(--gutter) minmax(0, 1fr);
